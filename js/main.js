@@ -185,7 +185,8 @@ function mostrarCarrito(listaCompras,listaImporte){
     for (let i = 0; i < listaCompras.length; i++) {
         let contenedor = document.createElement("div");
         let p = document.createElement("p");
-        p.innerHTML = `Camiseta: ${listaCompras[i]} - Precio: ${listaImporte[i]}`
+        p.innerHTML = `<h2>Carrito de Compras:</h2>
+        Camiseta: ${listaCompras[i]} - Precio: ${listaImporte[i]}`
         contenedor.appendChild(p);
         carrito.appendChild(contenedor);
     }
@@ -199,14 +200,11 @@ aumento(stockArgentina,1.20);
 aumento(stockBrasil,1.20);
 aumento(stockEspaña,1.20);
 aumento(stockItalia,1.20);
+
 eleccion(0);
 
 
-
-
-/*
 generarCamisetasEnHTML(stockArgentina);
 generarCamisetasEnHTML(stockBrasil);
 generarCamisetasEnHTML(stockEspaña);
 generarCamisetasEnHTML(stockItalia);
-*/

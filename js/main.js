@@ -37,33 +37,6 @@ class Camiseta{
     }
 }
 
-/********************************** DECLARACIÓN DE VARIABLES ***********************************/
-
-const iva = 0.21;
-
-const camisetasArgentina = ["Boca Juniors","River Plate","Independiente","Racing","San Lorenzo","Vélez Sarsfield"];
-const camisetasBrasil = ["Santos","Palmeiras","Flamengo","Fluminense","Gremio","Corinthians"];
-const camisetasEspaña = ["Barcelona","Real Madrid","Atlético de Madrid"];
-const camisetasItalia = ["Juventus","Milan","Inter","Nápoli"];
-
-const stockArgentina = [];
-const stockBrasil = [];
-const stockItalia = [];
-const stockEspaña = [];
-
-crearCamisetas(camisetasArgentina,stockArgentina,"Argentina",30,"m");
-crearCamisetas(camisetasBrasil,stockBrasil,"Brasil",30,"m");
-crearCamisetas(camisetasEspaña,stockEspaña,"España",30,"m");
-crearCamisetas(camisetasItalia,stockItalia,"Italia",30,"m");
-
-let carritoDeCompras = [];
-let importe = [];
-
-/*****************************************************************************************************************/
-
-
-
-
 
 /************************************** FUNCIONES **********************************/
 
@@ -83,91 +56,25 @@ function costoCamiseta(costo){
 
 
 /* Función creada para instanciar en un array todos los diferentes TIPOS DE CAMISETAS de cada país*/
-function crearCamisetas(listaCamisetas,listaNueva,pais,cantidad,talle){
-    for (let i = 0; i < listaCamisetas.length; i++) {
-        let camiseta = listaCamisetas[i];
-        if(!(listaNueva.find(x=>x.devolverClub() == camiseta))){ //Si no está creada, la crea.
-            let nueva = new Camiseta(camiseta,pais,cantidad,talle);
-            listaNueva.push(nueva);
-        };
+function crearCamisetas(listaCamisetas,stock,cantidad,talle){
+    for (const camisetaPais in listaCamisetas) {
+         let listaPais = listaCamisetas[camisetaPais];
+         let listaAux = [];
+        for (let i=0; i<listaPais.length;i++){
+            let camiseta = listaPais[i];
+            let nuevaCamiseta = new Camiseta(camiseta,listaPais,cantidad,talle);
+            stock.push(nuevaCamiseta);
+        }
+        //stock.push(listaAux);
     }
 }
 
-function aumento(lista,aumento) {
+/*function aumento(lista,aumento) {
     lista.map(camiseta => camiseta.modificarPrecio(camiseta.devolverPrecio()*aumento));    
-}
+}*/
 
 
-function eleccion(etapa) {
-    
-    let opcionInicial = prompt("Por favor, indique el país al cual pertenece el equipo que desea la camiseta de fútbol:\n1. Argentina \n2. Brasil\n3. España\n4. Italia\n");
-    while (opcionInicial < 1 || opcionInicial > 4 || opcionInicial == ""){
-        alert("Opción inválida.")
-        opcionInicial = prompt("Por favor, indique el país de su equipo de fútbol:\n1. Argentina \n2. Brasil\n3. España\n4. Italia");
-    }
 
-    if(opcionInicial == 1){
-        var opcionCamiseta = prompt(mostrarCamisetas(camisetasArgentina));
-        while (opcionCamiseta < 1 || opcionCamiseta > camisetasArgentina.length){
-            alert("Opción inválida.");
-            opcionCamiseta = prompt(mostrarCamisetas(camisetasArgentina));
-        }
-        opcionInicial = "Argentina";
-        stockArgentina[parseInt(opcionCamiseta) - 1].descontarCantidad();
-        opcionCamiseta = stockArgentina[parseInt(opcionCamiseta) - 1].devolverClub();
-        precio = costoCamiseta(stockArgentina.find(camiseta => camiseta.devolverClub()).devolverPrecio());
-    }
-    else if(opcionInicial == 2){
-        var opcionCamiseta = prompt(mostrarCamisetas(camisetasBrasil));
-        while (opcionCamiseta < 1 || opcionCamiseta > camisetasBrasil.length){
-            alert("Opción inválida.");
-            opcionCamiseta = prompt(mostrarCamisetas(camisetasBrasil));
-        }
-        opcionInicial = "Brasil";
-        stockBrasil[parseInt(opcionCamiseta) - 1].descontarCantidad();
-        opcionCamiseta = stockBrasil[parseInt(opcionCamiseta) - 1].devolverClub();
-        precio = costoCamiseta(stockArgentina.find(camiseta => camiseta.devolverClub()).devolverPrecio());
-
-    }else if(opcionInicial == 3){
-        var opcionCamiseta = prompt(mostrarCamisetas(camisetasEspaña));
-        while (opcionCamiseta < 1 || opcionCamiseta > camisetasEspaña.length){
-            alert("Opción inválida.");
-            opcionCamiseta = prompt(mostrarCamisetas(camisetasEspaña));
-        }
-        opcionInicial = "España";
-        stockEspaña[parseInt(opcionCamiseta) - 1].descontarCantidad();
-        opcionCamiseta = stockEspaña[parseInt(opcionCamiseta) - 1].devolverClub();
-        precio = costoCamiseta(stockArgentina.find(camiseta => camiseta.devolverClub()).devolverPrecio());
-    }else{
-        var opcionCamiseta = prompt(mostrarCamisetas(camisetasItalia));
-        while (opcionCamiseta < 1 || opcionCamiseta > camisetasItalia.length){
-            alert("Opción inválida.");
-            opcionCamiseta = prompt(mostrarCamisetas(camisetasItalia));
-        }
-        opcionInicial = "Italia";
-        stockItalia[parseInt(opcionCamiseta) - 1].descontarCantidad();
-        opcionCamiseta = stockEspaña[parseInt(opcionCamiseta) - 1].devolverClub();
-        precio = costoCamiseta(stockArgentina.find(camiseta => camiseta.devolverClub()).devolverPrecio());
-    }
-    carritoDeCompras.push(opcionCamiseta);
-    importe.push(precio);
-    
-    alert("Usted eligió la camiseta de " + opcionCamiseta + " por un precio total de " + precio);
-
-    continuar = prompt("Desea comprar otra camiseta? (S/N)")
-    if(continuar == "S" || continuar == "s"){
-        eleccion(etapa+1);
-    }
-    if(etapa===0){
-        continuar = prompt("Desea ver su carrito de compras? (S/N)")
-        if(continuar == "S" || continuar == "s"){
-            mostrarCarrito(carritoDeCompras,importe);
-        }else{
-            alert("Muchas gracias por su visita!");
-        }
-    }
-
-}
 
 function generarCamisetasEnHTML(listaCamisetas){
     let camisetas = document.getElementById("camisetas");
@@ -194,17 +101,72 @@ function mostrarCarrito(listaCompras,listaImporte){
 }
 
 
+/*********************************EVENTOS******************************************/
+
+let formulario = document.getElementById("form");
+formulario.onsubmit = function(evento) {
+    evento.preventDefault();
+}
+
+
+function generarCamisetasEvento(id,variedadCamisetas,stockCamisetas){ //Luego reemplazar por una función que muestre solo para los que haya stock
+    let padre = document.getElementById("camisetas");
+    let html = '';
+    for (const camisetaPais in variedadCamisetas) {
+        if (camisetaPais == id){
+            let listaPais = variedadCamisetas[camisetaPais];
+            for(let i=0; i<listaPais.length;i++){
+                html += `
+                        
+                        <div class="card mb-2" style="width: 18rem;">
+                            <img src="${imagenes[listaPais[i].replace(" ","")]}">
+                            <div class="card-body d-flex align-items-center flex-column">
+                                <h4 class="card-text text-center ">${listaPais[i]}</h4>
+                                <button id="listaPais[i]" class="btn btn-secondary">Comprar</button> 
+                            </div>
+                        
+                        </div>
+                        </div>`;
+                }
+            }
+        }
+        padre.innerHTML = html; 
+}
+
+
+
+/*<h3 class="text-center text-primary">
+                            ${listaPais[i]} 
+                            -> Precio: ${stockCamisetas.find(camiseta => camiseta.devolverClub()==listaPais[i]).devolverPrecio()}
+                            -> <img  src="${imagenes[listaPais[i].replace(" ","")]}">
+                            -> <button id="listaPais[i]" class="btn btn-secondary">Comprar</button>    
+                        </h3>
+
+*/
+
 /*********************************** MAIN ***********************************/
-alert("¡ Bienvenido a la tienda de camisetas de fútbol !");
-aumento(stockArgentina,1.20);
-aumento(stockBrasil,1.20);
-aumento(stockEspaña,1.20);
-aumento(stockItalia,1.20);
 
-eleccion(0);
+crearCamisetas(variedadCamisetas,stockCamisetas,20,"s");
+crearCamisetas(variedadCamisetas,stockCamisetas,20,"m");
+crearCamisetas(variedadCamisetas,stockCamisetas,20,"l");
+crearCamisetas(variedadCamisetas,stockCamisetas,0,"xl");
+
+console.log(stockCamisetas);
+
+let clickPais = document.getElementById("argentina");
+clickPais.onclick = () => generarCamisetasEvento("argentina",variedadCamisetas,stockCamisetas);
+
+clickPais = document.getElementById("brasil");
+clickPais.onclick = () => generarCamisetasEvento("brasil",variedadCamisetas,stockCamisetas);
+
+clickPais = document.getElementById("italia");
+clickPais.onclick = () => generarCamisetasEvento("italia",variedadCamisetas,stockCamisetas);
+
+clickPais = document.getElementById("españa");
+clickPais.onclick = () => generarCamisetasEvento("españa",variedadCamisetas,stockCamisetas);
 
 
-generarCamisetasEnHTML(stockArgentina);
-generarCamisetasEnHTML(stockBrasil);
-generarCamisetasEnHTML(stockEspaña);
-generarCamisetasEnHTML(stockItalia);
+
+
+
+

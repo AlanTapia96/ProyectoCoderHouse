@@ -8,6 +8,7 @@
     <title>ArgenShop - Camisetas de fútbol</title>
     <link rel="stylesheet" href="/ProyectoFinal/css/bootstrap.min.css">
     <link rel="stylesheet" href="/ProyectoFinal/css/main.css">
+    <script src="/ProyectoFinal/js/data.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 fixed-top ">
@@ -23,8 +24,7 @@
             <div class="navbar-nav ml-auto h6">
                 <a class="nav-link active" href="#">Inicio <span class="sr-only">(current)</span></a>
                 <a class="nav-link" href="#paises">Paises</a>
-                <a class="nav-link" href="#">Clubes</a>
-                <a class="nav-link" href="#">Contáctanos</a>
+                <a class="nav-link" href="#">Contactanos</a>
             </div>
             </div>
         </class>
@@ -96,23 +96,31 @@
           </div>
       </section>
       
-      <section id="camisetas" class="my-5 py-5 d-flex justify-content-between flex-wrap container"></section>">
+      <section id="camisetas" class="my-5 py-5 d-flex justify-content-around flex-wrap container"></section>">
 
       </section>
-      <section id="carrito">
-
-      </section>
-
       
 
-      <section class="my-5">
+      <section>
         <div class="row">
-          <div class="col-8">
-            <form id="form" class="container-fluid ">
+          <div class="col text-center">
+            <button id="carritoCompras" class="btn btn-primary justify-content-center col-10">Ver carrito</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="carrito">
+        
+      </div>
+
+      <section class="my-5 container-fluid">
+        <div class="row d-flex flex-nowrap align-content-stretch">
+          <div class="col-8 w-100 h-100">
+            <form id="form" class="w-100">
               <div class="card border-dark rounded-0">
                   <div class="card-header p-0">
                       <div class="bg-dark text-white text-center py-2">
-                          <h3><i class="fa fa-envelope"></i> Contáctanos</h3>
+                          <h3><i class="fa fa-envelope"></i> Contactanos</h3>
                           <p class="m-0">Indicanos qué camiseta quisieras que agreguemos</p>
                       </div>
                   </div>
@@ -148,24 +156,24 @@
                   </div>
       
               </div>
-          </form>
+            </form>
           </div>
-          <div class="col-4">
-            <div class="image">
+            <div class="image h-100">
               <img src="/ProyectoFinal/images/neymar.jpg" class="img-fluid" alt="">
             </div>
           </div>
 
         </div>
-
-  
       </section>
 
-
+    
     
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/ProyectoFinal/js/bootstrap.min.js"></script>
-<script src="/ProyectoFinal/js/data.js"></script>
 <script src="/ProyectoFinal/js/main.js"></script>
 </html>
+
+
+
+<!-- AGREGAR JSON ingresar nombre. Agregar algún filtro-->

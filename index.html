@@ -9,22 +9,23 @@
     <link rel="stylesheet" href="/ProyectoFinal/css/bootstrap.min.css">
     <link rel="stylesheet" href="/ProyectoFinal/css/main.css">
     <script src="/ProyectoFinal/js/data.js"></script>
+    <script src="/ProyectoFinal/js/clases.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 fixed-top ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 fixed-top">
         <class class="container">
-            
             <a class="navbar-brand" href="#">
                 <img src="/ProyectoFinal/images/pngegg (2).png" height="35" class="mr-2">ArgenShop
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
+            <div id="welcome" class="mx-auto px-5"></div>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto h6">
                 <a class="nav-link active" href="#">Inicio <span class="sr-only">(current)</span></a>
                 <a class="nav-link" href="#paises">Paises</a>
-                <a class="nav-link" href="#">Contactanos</a>
+                <a class="nav-link" href="#contacto">Contactanos</a>
             </div>
             </div>
         </class>
@@ -56,14 +57,17 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Siguiente</span>
         </a>
-        <div class="titulo position-absolute">
-          <h1 class="position-relative display-4 text-center">
+        <div class="titulo position-absolute px-5">
+          <h1 class="position-relative display-4 text-center pr-5 mr-5">
               Argenshop<br>
               Tienda de camisetas de fútbol</h1>
       </div>
       </div>
 
       
+      <div id="btn-carrito" class="h-100">
+        <button id="botonCarrito" class="btn btn-dark col-2 row-carrito"><i class="fas fa-shopping-cart"></i></button>
+    </div>
 
       <section id="paises" class="mt-5">
           <h2 class="text-center">Elija el país de la camiseta que desea</h2>
@@ -96,35 +100,39 @@
           </div>
       </section>
       
+      
+
       <section id="camisetas" class="my-5 py-5 d-flex justify-content-around flex-wrap container"></section>">
 
       </section>
       
 
-      <section>
-        <div class="row">
-          <div class="col text-center">
-            <button id="carritoCompras" class="btn btn-primary justify-content-center col-10">Ver carrito</button>
-          </div>
+      
+
+      <section id="carrito" class="container">
+        <div id="plantilla-carrito">
+
         </div>
+        <div id="elementos-carrito" >
+           
+
+        </div> 
       </section>
 
-      <div id="carrito">
-        
-      </div>
+      
 
-      <section class="my-5 container-fluid">
-        <div class="row d-flex flex-nowrap align-content-stretch">
-          <div class="col-8 w-100 h-100">
+      <section id="contacto" class="my-5 container-fluid pb-5">
+        <div class="row d-flex flex-nowrap align-content-center justify-content-center container-fluid h-100">
+          <div class="col-5 w-100 h-100">
             <form id="form" class="w-100">
-              <div class="card border-dark rounded-0">
+              <div class="card border-dark rounded-0 h-100">
                   <div class="card-header p-0">
                       <div class="bg-dark text-white text-center py-2">
                           <h3><i class="fa fa-envelope"></i> Contactanos</h3>
                           <p class="m-0">Indicanos qué camiseta quisieras que agreguemos</p>
                       </div>
                   </div>
-                  <div class="card-body p-3">
+                  <div class="card-body p-3 d-flex flex-column flex-nowrap">
                       <div class="form-group">
                           <div class="input-group mb-2">
                               <div class="input-group-prepend">
@@ -138,7 +146,7 @@
                               <div class="input-group-prepend">
                                   <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
                               </div>
-                              <input type="email" class="form-control" id="nombre" name="email" placeholder="ejemplo@gmail.com" required>
+                              <input type="email" class="form-control" id="email" name="email" placeholder="ejemplo@gmail.com" required>
                           </div>
                       </div>
                       <div class="form-group">
@@ -146,10 +154,9 @@
                               <div class="input-group-prepend">
                                   <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
                               </div>
-                              <textarea class="form-control" placeholder="Envianos tu Mensaje" required></textarea>
+                              <textarea class="form-control" id="text" placeholder="Envianos tu Mensaje" required></textarea>
                           </div>
                       </div>
-      
                       <div class="text-center">
                           <input type="submit" value="Enviar" class="btn btn-dark btn-block rounded-0 py-2">
                       </div>
@@ -158,17 +165,21 @@
               </div>
             </form>
           </div>
-            <div class="image h-100">
-              <img src="/ProyectoFinal/images/neymar.jpg" class="img-fluid" alt="">
+            <div class="image h-100 col-5">
+              <img src="/ProyectoFinal/images/neymar.jpg" class="" alt="">
             </div>
           </div>
 
         </div>
       </section>
+      <footer>
+
+      </footer>
 
     
     
 </body>
+<script src="/ProyectoFinal/js/carrito.js"></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/ProyectoFinal/js/bootstrap.min.js"></script>
 <script src="/ProyectoFinal/js/main.js"></script>
@@ -176,4 +187,3 @@
 
 
 
-<!-- AGREGAR JSON ingresar nombre. Agregar algún filtro-->

@@ -11,6 +11,7 @@ const imagenes = {
     RiverPlate : "/ProyectoFinal/images/camisetas/river.jpg",
     Independiente: "/ProyectoFinal/images/camisetas/independiente.jpg",
     SanLorenzo: "/ProyectoFinal/images/camisetas/san-lorenzo.jpg",
+    Racing: "/ProyectoFinal/images/camisetas/racing.jpg",
     Santos: "/ProyectoFinal/images/camisetas/santos.jpg",
     Palmeiras: "/ProyectoFinal/images/camisetas/palmeiras.jpg",
     Flamengo: "/ProyectoFinal/images/camisetas/flamengo.jpg",
@@ -25,6 +26,10 @@ const imagenes = {
     Inter: "/ProyectoFinal/images/camisetas/inter.jpg",
     Napoli: "/ProyectoFinal/images/camisetas/napoli.jpg"
 }
+
+
+
+
 
 
 const stockCamisetas = [];

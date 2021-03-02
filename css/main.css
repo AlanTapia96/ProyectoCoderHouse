@@ -19,6 +19,16 @@ body{
     margin-right: 2em;
 }
 
+.navbar-collapse{
+    flex-grow: 0;
+}
+
+#welcome{
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+}
+
 
 #paises{
     margin-top: 10em;
@@ -88,14 +98,39 @@ body{
     top: -4em;
 }
 
+#btn-carrito{
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 30%;
+    z-index: 100;
+}
+
+.row-carrito{
+    margin-top: 3em;
+    top: 8.0em;
+    position: sticky;
+}
 
 #carrito{
     margin-top: 2em;
+    background-color: white;
 }
 
 #carrito h2{
     text-align: center;
     color: lightseagreen;
+}
+
+.carrito-item{
+    width: 8em;
+    height: 8em;
+}
+
+.carrito-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
@@ -107,6 +142,27 @@ body{
 .card-bg{
     background-color: #555E7E; 
 }
+
+#contacto{
+    height: 42vh;
+}
+
+#contacto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#form{
+    height: 100%;
+}
+
+
+footer{
+    height: 20vh;
+    background-color: black;
+}
+
 
 @media only screen and (max-width:1618px){
     .carousel-item .img-1{

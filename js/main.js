@@ -1,47 +1,3 @@
-class Camiseta{
-    constructor(club,pais,cantidad,talle){
-        this.club = club;
-        this.pais = pais;
-        this.cantidad = cantidad;
-        this.talle = talle;
-        this.precio = 1500; //Precio estandar hasta el momento para todas las camisetas
-
-    }
-
-    modificarPrecio(precio){
-        this.precio = parseFloat(precio);
-    }
-
-    agregarCantidad(cant){
-        this.cantidad += cant;
-    }   
-
-    vender(){
-        this.cantidad -= 1;
-    }
-
-    devolverClub(){
-        return this.club;
-    }
-
-    devolverCantidad(){
-        return this.cantidad;
-    }
-
-    devolverTalle(){
-        return this.talle;
-    }
-
-    devolverPrecio(){
-        return this.precio;
-    }
-
-    devolverPais(){
-        return this.pais;
-    }
-}
-
-
 /************************************** FUNCIONES **********************************/
 
 /* Función creada para instanciar en un array todos los diferentes TIPOS DE CAMISETAS de cada país*/
@@ -50,7 +6,7 @@ function crearCamisetas(listaCamisetas,stock,cantidad,talle){
          let listaPais = listaCamisetas[pais];
         for (let i=0; i<listaPais.length;i++){
             let camiseta = listaPais[i];
-            let nuevaCamiseta = new Camiseta(camiseta,listaPais,cantidad,talle);
+            let nuevaCamiseta = new Camiseta(camiseta,pais,cantidad,talle);
             stock.push(nuevaCamiseta);
         }
     }
@@ -68,33 +24,24 @@ function aumento(lista,aumento) {
 
 
 
-/*function mostrarCarrito(listaCompras,listaImporte){
-    let carrito = document.getElementById("carrito");
-    for (let i = 0; i < listaCompras.length; i++) {
-        let contenedor = document.createElement("div");
-        let p = document.createElement("p");
-        p.innerHTML = `<h2>Carrito de Compras:</h2>
-        Camiseta: ${listaCompras[i]} - Precio: ${listaImporte[i]}`
-        contenedor.appendChild(p);
-        carrito.appendChild(contenedor);
-    }
-        
-}*/
-
 
 /*********************************EVENTOS******************************************/
 function formulario(id) {
-    id.onsubmit = function(evento) {
+    let datos = []
+    id.onsubmit = (evento) => {
             evento.preventDefault();
-            let form = evento.target;
-            console.dir(form);
-            alert(form.children[0] .value);
-            }   
+            let nombre = document.getElementById("nombre");
+            let mail = document.getElementById("email");
+            let text = document.getElementById("text"); 
+            datos.push(nombre.value,mail.value,text.value); 
+            nombre.value = mail.value = text.value = "";
+            console.log(datos);
+            }  
 }
 
 
 
-function generarCamisetasEvento(id,variedadCamisetas){ //Luego reemplazar por una función que muestre solo para los que haya stock
+function generarCamisetasEvento(id,variedadCamisetas){ 
     let padre = document.getElementById("camisetas");
     let html = '';
     for (const camisetaPais in variedadCamisetas) {
@@ -104,10 +51,11 @@ function generarCamisetasEvento(id,variedadCamisetas){ //Luego reemplazar por un
                 html += `
                         
                         <div class="card mb-2" style="width: 18rem;">
-                            <img src="${imagenes[listaPais[i].replace(" ","")]}">
                             <div class="card-body d-flex align-items-center flex-column">
-                                <h4 class="card-text text-center ">${listaPais[i]}</h4>
-                                <button id="${listaPais[i]}" class="btn btn-secondary">Comprar</button> 
+                                <h4 class="card-text camiseta text-center">${listaPais[i]}</h4>
+                                <img class="img-fluid img" src="${imagenes[listaPais[i].replace(" ","")]}">
+                                <h4 class="precio">${stockCamisetas.find(camiseta => camiseta.devolverClub() == listaPais[i]).devolverPrecio()}</h4>
+                                <button id="${listaPais[i]}" class="btn btn-secondary buy">Comprar</button> 
                             </div>
                         
                         </div>
@@ -115,33 +63,27 @@ function generarCamisetasEvento(id,variedadCamisetas){ //Luego reemplazar por un
                 }
             }
         }
-       padre.innerHTML = html; 
-        for (const camiseta of stockCamisetas){
-                let botonComprar = document.getElementById(camiseta.devolverClub());
-                botonComprar.onclick = () => {
-                                    camiseta.vender();
-                                    carritoDeCompras.push(camiseta.devolverClub()); //agrego al carrito
-                                    importe.push(camiseta.devolverPrecio());
-                                    alert(`Compraste la camiseta ${camiseta.devolverClub()}`)
-                                    console.log(carritoDeCompras);
-                                    }
-        
+       padre.innerHTML = html;
+       comprar();
     }
 
-    /*
-    for (const camiseta of stockCamisetas){
-            if(camiseta.devolverPais() == id){
-                let botonComprar = document.getElementById(camiseta.devolverClub());
-                botonComprar.onclick = () => {
-                    camiseta.vender();
-                    carritoDeCompras.push(camiseta.devolverClub()); //agrego al carrito
-                    importe.push(camiseta.devolverPrecio());
-                    alert(`Compraste la camiseta ${camiseta.devolverClub()}`)
-            }
-        }
+
+
+
+function welcome() {
+    if(localStorage.getItem("nombre") == null){
+        localStorage.setItem("nombre",prompt("Por favor, ingrese su nombre"));
     }
-    */
+    
+    let welcome = document.getElementById("welcome");
+    let names = localStorage.getItem("nombre");
+    welcome.innerHTML = `Bienvenido ${names}`;
 }
+
+/************************************************************************** */
+
+
+
 
 
 
@@ -152,7 +94,7 @@ crearCamisetas(variedadCamisetas,stockCamisetas,20,"m");
 crearCamisetas(variedadCamisetas,stockCamisetas,20,"l");
 crearCamisetas(variedadCamisetas,stockCamisetas,0,"xl");
 
-console.log(stockCamisetas);
+welcome();
 
 
 for (const idPais in variedadCamisetas) {
@@ -160,27 +102,63 @@ for (const idPais in variedadCamisetas) {
     clickPais.onclick = () => generarCamisetasEvento(idPais,variedadCamisetas,stockCamisetas);
 }
 
-console.log(carritoDeCompras);
 
 
-carritoDeCompras = ["hola","chau"];
-importe = ["1","2"];
+var carritoDesplegado = false;
+const carrito = document.getElementById("botonCarrito");
+carrito.addEventListener("click",(e) => {
+    if(localStorage.getItem("carrito") == null){
+        alert("El carrito se encuentra vacío")
+    }else{
+        const plantillaCarrito = document.querySelector('#plantilla-carrito');
+        const carritoCompras = document.querySelector('#elementos-carrito');
+        if(carritoDesplegado == false){
+            let templateCarrito = document.createElement("div");
+            let agregar = `<div class="row d-flex align-items-center px-5 py-4">
+                                <div class="col-5 border-bottom">
+                                    <h4>Camiseta</h4>
+                                </div>
+                                <div class="col-2 border-bottom">
+                                    <h4>Precio</h4>
+                                </div>
+                                <div class="col-4 border-bottom">
+                                    <h4>Cantidad</h4>
+                                </div>
+                                <div class="col-1">
+                                    <button id="vaciarCarrito" class="btn btn-primary justify-content-center">Vaciar carrito</button>
+                                </div>
+                                
+                            </div> `  
+            templateCarrito.innerHTML = agregar;
+            plantillaCarrito.appendChild(templateCarrito);
+            agregarCamisetasStorageAlaVistaCarrito();
+            carritoDesplegado = true ;
+            botonBorrarItem();
+
+    }else{
+        plantillaCarrito.innerHTML = "";
+        carritoCompras.innerHTML = "";
+        carritoDesplegado = false;
+    }}
+
+});
 
 
-let carrito = document.getElementById("carritoCompras");
-carrito.onclick = function(carritoDeCompras,importe){
-                        let padre = document.getElementById("carrito");
-                        let p = "<h2>Carrito de Compras:</h2>";
-                        for (let i = 0; i < carritoDeCompras.length; i++) {
-                            p += `<div>Camiseta: ${carritoDeCompras[i]} - Precio: ${importe[i]}</div>`
-                        }
-   padre.innerHTML = p;
-};
 
 formulario(document.getElementById("form"));
 
 
-//consultar formulario
-//consultar error botones
-//consultar carrito de compras
 
+//Los datos del formulario guardarlos en algún lugar (array / objeto)
+
+
+// ver diferencias entre for...of y for...in
+// Preguntar si cuando obtenes un objeto obtenes los métodos. O cómo haces para obtener los métodos de un objeto?
+/* Ver si el carrito de comrpas lo hacemos : por cada compra se guarda en local storage
+y cuando quiero ver el carrito, lo obtengo desde ahí con json y lo muestro en pantalla.
+O si lo hacemos como está hecho en el video del chabón que mandó el video el tutor.
+
+//Arreglar el recorrido de las camisetas en el boton comprar. Recorre TODAS las camisetas. No es eficiente
+
+Agregar algún filtro para buscar
+*/

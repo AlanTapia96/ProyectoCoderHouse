@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 /************************************** FUNCIONES **********************************/
 
 /* Función creada para instanciar en un array todos los diferentes TIPOS DE CAMISETAS de cada país*/
@@ -24,19 +26,23 @@ function aumento(lista,aumento) {
 
 
 
-
 /*********************************EVENTOS******************************************/
-function formulario(id) {
-    let datos = []
-    id.onsubmit = (evento) => {
-            evento.preventDefault();
-            let nombre = document.getElementById("nombre");
-            let mail = document.getElementById("email");
-            let text = document.getElementById("text"); 
-            datos.push(nombre.value,mail.value,text.value); 
-            nombre.value = mail.value = text.value = "";
-            console.log(datos);
-            }  
+
+
+function formulario(e){
+    let datos = [];
+    $('#contacto').submit(function (e) { 
+        e.preventDefault();
+        let nombre = $('#nombre').val();
+        let mail = $('#email').val();
+        let text = $('#text').val();
+        datos.push(nombre,mail,text);
+        nombre = document.getElementById("nombre");
+        mail = document.getElementById("email");
+        text = document.getElementById("text");
+        nombre.value = mail.value = text.value = "";
+    
+    });
 }
 
 
@@ -48,8 +54,7 @@ function generarCamisetasEvento(id,variedadCamisetas){
         if (camisetaPais == id){
             let listaPais = variedadCamisetas[camisetaPais];
             for(let i=0; i<listaPais.length;i++){
-                html += `
-                        
+                html += `  
                         <div class="card mb-2" style="width: 18rem;">
                             <div class="card-body d-flex align-items-center flex-column">
                                 <h4 class="card-text camiseta text-center">${listaPais[i]}</h4>
@@ -68,8 +73,6 @@ function generarCamisetasEvento(id,variedadCamisetas){
     }
 
 
-
-
 function welcome() {
     if(localStorage.getItem("nombre") == null){
         localStorage.setItem("nombre",prompt("Por favor, ingrese su nombre"));
@@ -80,8 +83,39 @@ function welcome() {
     welcome.innerHTML = `Bienvenido ${names}`;
 }
 
-/************************************************************************** */
+/******************************** API Provincias/Municipios *************************************** */
 
+const url_provincias = "https://apis.datos.gob.ar/georef/api/provincias";
+
+$.get(url_provincias, function(respuesta,estado) {
+        if(estado === "success"){
+            let provinciasApi = respuesta.provincias;
+            let provincias = document.getElementById("provincias");
+            let provinciasHTML = "<option disabled selected>Selecciona una opción</option>";
+            for (const provincia of provinciasApi) {
+                provinciasHTML += `<option id="${provincia.id}" class="provincia">${provincia.nombre}</option>`;
+            }
+            provincias.innerHTML = provinciasHTML;
+            let seleccion = document.getElementById("provincias");
+            seleccion.onchange = function(){
+                let provinciaElegida = seleccion.value;
+                $.get(`https://apis.datos.gob.ar/georef/api/departamentos?provincia=${provinciaElegida}&campos=id,nombre&max=4000`,function(respuesta2,estado2){
+                    if(estado2 === "success"){
+                        let municipiosApi = respuesta2.departamentos;
+                        let municipios    = document.getElementById("municipios");
+                        let municipiosHTML =  "<option disabled selected>Selecciona una opción</option>";
+                        for (const municipio of municipiosApi){
+                            municipiosHTML += `<option id="${municipio.id}" class="provincia">${municipio.nombre}</option>`
+                        }
+                        municipios.innerHTML = municipiosHTML;
+                    }
+                }
+                )
+            }
+        }else{
+            console.log("No se pudo procesar");
+        }
+    });
 
 
 
@@ -96,6 +130,9 @@ crearCamisetas(variedadCamisetas,stockCamisetas,0,"xl");
 
 welcome();
 
+carritoDeCompras = obtenerCarritoStorage();
+console.log(carritoDeCompras);
+cantidadCarrito = obtenerCantidadStorage();
 
 for (const idPais in variedadCamisetas) {
     let clickPais = document.getElementById(idPais);
@@ -104,61 +141,21 @@ for (const idPais in variedadCamisetas) {
 
 
 
-var carritoDesplegado = false;
-const carrito = document.getElementById("botonCarrito");
-carrito.addEventListener("click",(e) => {
-    if(localStorage.getItem("carrito") == null){
-        alert("El carrito se encuentra vacío")
-    }else{
-        const plantillaCarrito = document.querySelector('#plantilla-carrito');
-        const carritoCompras = document.querySelector('#elementos-carrito');
-        if(carritoDesplegado == false){
-            let templateCarrito = document.createElement("div");
-            let agregar = `<div class="row d-flex align-items-center px-5 py-4">
-                                <div class="col-5 border-bottom">
-                                    <h4>Camiseta</h4>
-                                </div>
-                                <div class="col-2 border-bottom">
-                                    <h4>Precio</h4>
-                                </div>
-                                <div class="col-4 border-bottom">
-                                    <h4>Cantidad</h4>
-                                </div>
-                                <div class="col-1">
-                                    <button id="vaciarCarrito" class="btn btn-primary justify-content-center">Vaciar carrito</button>
-                                </div>
-                                
-                            </div> `  
-            templateCarrito.innerHTML = agregar;
-            plantillaCarrito.appendChild(templateCarrito);
-            agregarCamisetasStorageAlaVistaCarrito();
-            carritoDesplegado = true ;
-            botonBorrarItem();
-
-    }else{
-        plantillaCarrito.innerHTML = "";
-        carritoCompras.innerHTML = "";
-        carritoDesplegado = false;
-    }}
-
-});
+$('#btnCarrito').click(function(){
+    $('#carrito').toggle("slow",verCarrito);
+}
+ );
 
 
 
-formulario(document.getElementById("form"));
+formulario();
 
+})
 
 
 //Los datos del formulario guardarlos en algún lugar (array / objeto)
 
-
-// ver diferencias entre for...of y for...in
-// Preguntar si cuando obtenes un objeto obtenes los métodos. O cómo haces para obtener los métodos de un objeto?
-/* Ver si el carrito de comrpas lo hacemos : por cada compra se guarda en local storage
-y cuando quiero ver el carrito, lo obtengo desde ahí con json y lo muestro en pantalla.
-O si lo hacemos como está hecho en el video del chabón que mandó el video el tutor.
-
 //Arreglar el recorrido de las camisetas en el boton comprar. Recorre TODAS las camisetas. No es eficiente
-
+/*
 Agregar algún filtro para buscar
 */

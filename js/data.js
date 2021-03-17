@@ -28,12 +28,9 @@ const imagenes = {
 }
 
 
-
-
-
-
 const stockCamisetas = [];
-let carritoDeCompras = [];
+var carritoDeCompras;
+var cantidadCarrito;
 let importe = [];
 
 

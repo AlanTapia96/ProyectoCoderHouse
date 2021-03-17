@@ -1,10 +1,17 @@
 html{
     scroll-behavior: smooth;
+    box-sizing: border-box;
 }
 
+
 body{
-    background-color: #555E7E;
-    
+    /* background-color: #555E7E; */
+    /* background-color: #9a9e9a; */
+    background-color: rgba(255, 255, 255, 0.911);
+}
+
+a{
+    color: white;
 }
 
 .titulo{
@@ -23,6 +30,10 @@ body{
     flex-grow: 0;
 }
 
+.w-33{
+    width:33%;
+}
+
 #welcome{
     color: white;
     font-size: 1.2em;
@@ -31,8 +42,9 @@ body{
 
 
 #paises{
-    margin-top: 10em;
+    /* margin-top: 10em; */
     position: relative;
+    z-index: 0;
 }
 
  #paises img{
@@ -40,7 +52,8 @@ body{
     height: 100%;
     object-fit: contain;
     filter: grayscale(.8);
-    transition: filter ease .2s;
+    transition: all ease .2s;
+    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 } 
 
 #paises img:hover{
@@ -48,6 +61,7 @@ body{
     height: 100%;
     object-fit: contain;
     filter: grayscale(0);
+    
 } 
 
 
@@ -55,6 +69,14 @@ body{
     width: 20em;
     height: 35em;
     position: relative;
+    transition: all ease .6s
+}
+
+.contenedor:hover{
+    width: 21em;
+    height: 36em;
+    
+    
 }
 
 #carousel{
@@ -102,18 +124,20 @@ body{
     position: absolute;
     display: inline-block;
     height: 100%;
-    width: 30%;
-    z-index: 100;
+    width: 5%;
 }
 
 .row-carrito{
-    margin-top: 3em;
-    top: 8.0em;
+
+    margin-top: .3em;
+    top: 8em;
     position: sticky;
+    z-index: 1500;
 }
 
 #carrito{
-    margin-top: 2em;
+    display:none;
+    margin-bottom: 10em;
     background-color: white;
 }
 
@@ -144,7 +168,7 @@ body{
 }
 
 #contacto{
-    height: 42vh;
+    height: auto;
 }
 
 #contacto img{
@@ -159,10 +183,21 @@ body{
 
 
 footer{
-    height: 20vh;
+    height: auto;
     background-color: black;
 }
 
+
+.input-group-prepend{
+    width: 9%;
+}
+
+.input-group-text{
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+}
 
 @media only screen and (max-width:1618px){
     .carousel-item .img-1{
@@ -181,6 +216,10 @@ footer{
         top: 0;
     }
 
+    .input-group-prepend{
+        width: 10%;
+    }
+
 }
 
 @media only screen and (max-width:991px){
@@ -195,12 +234,18 @@ footer{
         
     }
     
-
+    .input-group-prepend{
+        width: 13%;
+    }
 }
 
 @media only screen and (max-width:767px){
     #carousel h1{
         font-size: 1.7em;
+    }
+
+    .input-group-prepend{
+        width: 15%;
     }
 
 }
@@ -213,6 +258,9 @@ footer{
         font-size: 1.4em;
     }
 
+    .input-group-prepend{
+        width: 20%;
+    }
 
 }
 

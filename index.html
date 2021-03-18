@@ -2,49 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0">
     <link rel="shortcut icon" href="/ProyectoFinal/images/pngegg (2).png">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <title>ArgenShop - Camisetas de fútbol</title>
-    <link rel="stylesheet" href="/ProyectoFinal/css/bootstrap.min.css">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,100&display=swap" rel="stylesheet">
+    <!-- BOOTSTRAP 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="/ProyectoFinal/css/main.css">
     <script src="/ProyectoFinal/js/data.js"></script>
     <script src="/ProyectoFinal/js/clases.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 fixed-top">
-        <class class="container">
-          <div class="row d-flex justify-content-between">
-            <div class="justify-content-center align-self-center w-33">
-                  <a class="navbar-brand" href="#">
-                    <img src="/ProyectoFinal/images/pngegg.png" height="53" class="mr-2">ArgenShop
-                 </a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-            </div>
-            <div class="justify-content-center align-self-center w-33">
-              <div id="welcome" class="mx-auto"></div>
-            </div>
-            <div class="align-self-center w-33 d-flex justify-content-end">
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto h6 d-flex justify-content-end">
-                    <a class="nav-link active " href="#">Inicio <span class="sr-only">(current)</span></a>
-                    <a class="nav-link " href="#paises">Paises</a>
-                    <a class="nav-link " href="#contacto">Contactanos</a>
-                </div>
-                </div>
-            </div>
-          </div>
-            
-           
-            
-        </class>
-      </nav>
 
-      
-      <div id="carousel" class="carousel slide" data-ride="carousel">
+  <header class="bg-dark fixed-top">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
+          <div>
+            <a class="navbar-brand" href="#">
+                <img src="/ProyectoFinal/images/pngegg.png" height="40" class="mr-2">
+                ArgenShop
+             </a>
+          </div>
+          <div id="div-welcome">
+            <h2 id="welcome" class="text-center"></h2>
+        </div> 
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Inicio</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#paises">Paises</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#contacto">Contactanos</a>
+              </li>
+              <li class="nav-item">
+                <button id="btnCarrito" class="btn btn-dark row-carrito position-sticky">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </div>
+  </header>
+  
+  <section class="row-carrito">
+    <div id="carrito" class="container">
+     <div id="plantilla-carrito">
+       <div class="row d-flex align-items-center px-5 py-4">
+         <div class="col-4 border-bottom">
+             <h4>Camiseta</h4>
+         </div>
+         <div class="col-3 border-bottom">
+             <h4>Precio unitario</h4>
+         </div>
+         <div class="col-2 border-bottom">
+             <h4>Cantidad</h4>
+         </div>
+         <div class="col-1">
+             <button id="vaciarCarrito" class="btn btn-primary justify-content-center">Vaciar carrito</button>
+         </div>
+         
+       </div> 
+     </div>
+     <div id="elementos-carrito" >
         
+
+     </div> 
+   </div>
+   
+  </section>
+
+      <div id="carousel" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carousel" data-slide-to="0" class="active"></li>
             <li data-target="#carousel" data-slide-to="1"></li>
@@ -62,35 +99,25 @@
               <img src="/ProyectoFinal/images/8.jpg" class="d-block img-fluid">
             </div>
           </div>
-          
           <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Anterior</span>
           </a>
-         
           <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Siguiente</span>
           </a>
-            <div class="titulo  position-absolute">
-              <h1 class="position-relative text-center">
-                  Argenshop<br>
-                  Tienda de camisetas de fútbol</h1>
-          </div>
-        </div>
-        
+            <div id="titulo-principal" class="titulo position-absolute">
+            </div>
       </div>
+        
 
  
-       <div class="row-carrito">
-
-         <a href="#carrito"><button id="btnCarrito" class="btn btn-dark col-1 row-carrito position-sticky">
-           <i class="fas fa-shopping-cart"></i>
-         </button>
-        </a>
-       </div>
+       
    
-
+      <section>
+        
+      </section>
       <section id="paises">
           <h2 class="text-center">Elija el país de la camiseta que desea</h2>
           <div class="container mt-5">
@@ -131,29 +158,7 @@
 
       
 
-      <section id="carrito" class="container">
-        <div id="plantilla-carrito">
-          <div class="row d-flex align-items-center px-5 py-4">
-            <div class="col-4 border-bottom">
-                <h4>Camiseta</h4>
-            </div>
-            <div class="col-3 border-bottom">
-                <h4>Precio unitario</h4>
-            </div>
-            <div class="col-2 border-bottom">
-                <h4>Cantidad</h4>
-            </div>
-            <div class="col-1">
-                <button id="vaciarCarrito" class="btn btn-primary justify-content-center">Vaciar carrito</button>
-            </div>
-            
-          </div> 
-        </div>
-        <div id="elementos-carrito" >
-           
-
-        </div> 
-      </section>
+      
 
 
       
@@ -225,7 +230,7 @@
 
       <footer class="text-white d-flex justify-content-around align-items-center py-2 ">  
         <div class="justify-content-center align-items-center" >
-          <h5>Proyecto final Coderhouse 2021</h5>
+          <h5>® Coderhouse 2021 - Proyecto final</h5>
         </div>
         <div class="d-flex flex-column justify-content-center align-content-center">
           <div>
@@ -233,9 +238,9 @@
           </div>
           <div>
             <ul class="d-flex list-unstyled justify-content-around">
-              <li><a href="https://www.instagram.com/coderhouse/"><i class="fab fa-instagram"></i></a></li>
-              <li><a href="https://www.coderhouse.com/"><i class="fab fa-chrome"></i></a></li>
-              <li><a href="https://www.facebook.com/CoderHouse"><i class="fab fa-facebook-square"></i></a></li>
+              <li><a href="https://www.instagram.com/coderhouse/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+              <li><a href="https://www.coderhouse.com/" target="_blank"><i class="fab fa-chrome"></i></a></li>
+              <li><a href="https://www.facebook.com/CoderHouse" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
             </ul>
           </div>
         </div>
@@ -244,10 +249,13 @@
     
     
 </body>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- BOOTSTRAP 4 -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script  src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+<script src="./js/animaciones.js"></script>
 <script src="/ProyectoFinal/js/carrito.js"></script>
-<script src="/ProyectoFinal/js/bootstrap.min.js"></script>
 <script src="/ProyectoFinal/js/main.js"></script>
 <script src="/ProyectoFinal/js/animaciones.js"></script>
 </html>

@@ -80,7 +80,9 @@ function welcome() {
     
     let welcome = document.getElementById("welcome");
     let names = localStorage.getItem("nombre");
-    welcome.innerHTML = `Bienvenido ${names}`;
+
+    welcome.innerHTML = `¡Bienvenido/a, ${names}!`;
+    $('.div-welcome').fadeIn('slow');
 }
 
 /******************************** API Provincias/Municipios *************************************** */

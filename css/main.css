@@ -5,8 +5,6 @@ html{
 
 
 body{
-    /* background-color: #555E7E; */
-    /* background-color: #9a9e9a; */
     background-color: rgba(255, 255, 255, 0.911);
 }
 
@@ -17,8 +15,7 @@ a{
 .titulo{
     width: 100%;
     top: 2em;
-    z-index: 100;
-    color: whitesmoke;
+    z-index:1000;
 }
 
 
@@ -27,22 +24,28 @@ a{
 }
 
 .navbar-collapse{
-    flex-grow: 0;
+    display:inline-block;
+    width: 10%;
 }
 
-.w-33{
-    width:33%;
+#div-welcome{
+    display: inline;
+    position: absolute;
+    top: -3em;
+    left:50%;
+    transform: translate(-50%, 0);
 }
 
 #welcome{
     color: white;
-    font-size: 1.2em;
-    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 0;
+    margin-top: 0.2em;
 }
 
 
 #paises{
-    /* margin-top: 10em; */
+
     position: relative;
     z-index: 0;
 }
@@ -75,8 +78,6 @@ a{
 .contenedor:hover{
     width: 21em;
     height: 36em;
-    
-    
 }
 
 #carousel{
@@ -92,7 +93,7 @@ a{
 #carousel h1{
     font-size: 3em;
     color: #fff; 
-    font-family: 'Trocchi', serif;  
+    font-family: 'Roboto', serif;  
     font-weight: normal; 
     top: 1em;
     margin-top: .2em; 
@@ -128,7 +129,7 @@ a{
 }
 
 .row-carrito{
-
+    /* position: absolute; */
     margin-top: .3em;
     top: 8em;
     position: sticky;
@@ -136,9 +137,13 @@ a{
 }
 
 #carrito{
+    position: absolute;
     display:none;
     margin-bottom: 10em;
     background-color: white;
+    opacity: 0.7;
+    border: .2px solid #000;
+    box-shadow: 1px 3px 20px 10px rgb(0 0 0 / 20%);
 }
 
 #carrito h2{
@@ -244,10 +249,21 @@ footer{
         font-size: 1.7em;
     }
 
+    /* header{
+        height: 3em;
+    } */
+
+    .navbar div{
+        height: 5vh;
+    }
+
     .input-group-prepend{
         width: 15%;
     }
 
+    #div-welcome{
+        display:none;
+    }
 }
 
 @media only screen and (max-width:575px){

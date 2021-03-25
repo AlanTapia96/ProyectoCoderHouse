@@ -6,7 +6,7 @@ $(document).ready(function () {
     
 
     
-    $('#div-welcome').animate({top: '1.5em'},1300);
+    $('#div-welcome').animate({top: '1.2em'},1300);
 
     gsap.from('#titulo-principal',{
         y: -300,
@@ -14,11 +14,15 @@ $(document).ready(function () {
 
     gsap.to('#titulo-principal',{
         duration: 2,
-        y: 0,
+        y: -10,
         ease: 'back'
     })
 
 
+    gsap.to("#choose", {
+        scrollTrigger: ".box", // start the animation when ".box" enters the viewport (once)
+        x: 0,
+      });
 
 });
 

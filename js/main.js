@@ -1,14 +1,23 @@
 $(document).ready(function(){
 
-/************************************** FUNCIONES **********************************/
+function welcome() {
+    if(localStorage.getItem("nombre") == null){
+        localStorage.setItem("nombre",prompt("Por favor, ingrese su nombre"));
+    }
+    
+    let welcome = document.getElementById("welcome");
+    let names = localStorage.getItem("nombre");
+    welcome.innerHTML = `¡Bienvenido/a, ${names}!`;
+    $('.div-welcome').fadeIn('slow');
+}
 
-/* Función creada para instanciar en un array todos los diferentes TIPOS DE CAMISETAS de cada país*/
-function crearCamisetas(listaCamisetas,stock,cantidad,talle){
-    for (const pais in listaCamisetas) {
-         let listaPais = listaCamisetas[pais];
+/* Función para crear todos los objetos*/
+function instantiateShirts(stock,cantidad){
+    for (const pais in variedadCamisetas) {
+         let listaPais = variedadCamisetas[pais];
         for (let i=0; i<listaPais.length;i++){
             let camiseta = listaPais[i];
-            let nuevaCamiseta = new Camiseta(camiseta,pais,cantidad,talle);
+            let nuevaCamiseta = new Camiseta(camiseta,pais,cantidad);
             stock.push(nuevaCamiseta);
         }
     }
@@ -41,8 +50,19 @@ function formulario(e){
         mail = document.getElementById("email");
         text = document.getElementById("text");
         nombre.value = mail.value = text.value = "";
-    
+        $('#contacto').append("<div id='success' class='position-relative'></div>");
+        
+        gsap.from('#success',{
+            y: -80,
+        })
+        $('#success').html("<div class='text-center mt-2'><h3 class=''>¡Formulario enviado con éxito!</h3></div>")
+        gsap.to('#success',{
+            duration: 1,
+            y: 5,
+            ease: 'none'
+        })    
     });
+    
 }
 
 
@@ -54,36 +74,16 @@ function generarCamisetasEvento(id,variedadCamisetas){
         if (camisetaPais == id){
             let listaPais = variedadCamisetas[camisetaPais];
             for(let i=0; i<listaPais.length;i++){
-                html += `  
-                        <div class="card mb-2" style="width: 18rem;">
-                            <div class="card-body d-flex align-items-center flex-column">
-                                <h4 class="card-text camiseta text-center">${listaPais[i]}</h4>
-                                <img class="img-fluid img" src="${imagenes[listaPais[i].replace(" ","")]}">
-                                <h4 class="precio">${stockCamisetas.find(camiseta => camiseta.devolverClub() == listaPais[i]).devolverPrecio()}</h4>
-                                <button id="${listaPais[i]}" class="btn btn-secondary buy">Comprar</button> 
-                            </div>
-                        
-                        </div>
-                        </div>`;
+                camiseta = listaPais[i];
+                console.log(camiseta);
+                html += renderCamisetas(camiseta);
                 }
             }
         }
        padre.innerHTML = html;
-       comprar();
+       elegirTalle();
     }
 
-
-function welcome() {
-    if(localStorage.getItem("nombre") == null){
-        localStorage.setItem("nombre",prompt("Por favor, ingrese su nombre"));
-    }
-    
-    let welcome = document.getElementById("welcome");
-    let names = localStorage.getItem("nombre");
-
-    welcome.innerHTML = `¡Bienvenido/a, ${names}!`;
-    $('.div-welcome').fadeIn('slow');
-}
 
 /******************************** API Provincias/Municipios *************************************** */
 
@@ -120,20 +120,16 @@ $.get(url_provincias, function(respuesta,estado) {
     });
 
 
-
-
+ 
 
 /*********************************** MAIN ***********************************/
 
-crearCamisetas(variedadCamisetas,stockCamisetas,20,"s");
-crearCamisetas(variedadCamisetas,stockCamisetas,20,"m");
-crearCamisetas(variedadCamisetas,stockCamisetas,20,"l");
-crearCamisetas(variedadCamisetas,stockCamisetas,0,"xl");
+instantiateShirts(stockCamisetas,20);
+
 
 welcome();
-
+buscador();
 carritoDeCompras = obtenerCarritoStorage();
-console.log(carritoDeCompras);
 cantidadCarrito = obtenerCantidadStorage();
 
 for (const idPais in variedadCamisetas) {
@@ -142,22 +138,48 @@ for (const idPais in variedadCamisetas) {
 }
 
 
-
 $('#btnCarrito').click(function(){
     $('#carrito').toggle("slow",verCarrito);
 }
  );
 
 
-
 formulario();
 
 })
 
+/*Función global para ser reconocida por buscador.js*/
+
+function renderCamisetas(camiseta){
+    if(camiseta.includes(" ")){
+        camiseta = camiseta.replace(" ", "");
+    }
+    let html =  `  
+            <div class="card card-camiseta my-3 mr-2">
+                <div class="card-body d-flex align-items-center flex-column">
+                    <div class="h4-card">
+                        <h4 class="card-text camiseta text-center">${camiseta}</h4>
+                    </div>
+                    <div class="img-card">
+                        <img class="img-fluid img" src="${imagenes[camiseta]}">
+                    </div>
+                    <div class="talles-card">
+                        <button id="XS ${camiseta}" class="btn talle btn-dark">XS</button>
+                        <button id="S ${camiseta}" class="btn talle btn-dark">S</button>
+                        <button id="M ${camiseta}" class="btn talle btn-dark">M</button>
+                        <button id="L $ {camiseta}" class="btn talle btn-dark">L</button>
+                        <button id="XL ${camiseta}" class="btn talle btn-dark">XL</button>
+                    </div>
+                    <div class="precio-card text-center">
+                        <h4 class="precio">${stockCamisetas.find(cam => cam.devolverClub().replace(" ", "") == camiseta).devolverPrecio()}</h4>
+                        <button disabled class="btn btn-secondary buy">Comprar</button> 
+                    </div>  
+                </div>
+            </div>`
+    return html;
+}
 
 //Los datos del formulario guardarlos en algún lugar (array / objeto)
 
 //Arreglar el recorrido de las camisetas en el boton comprar. Recorre TODAS las camisetas. No es eficiente
-/*
-Agregar algún filtro para buscar
-*/
+

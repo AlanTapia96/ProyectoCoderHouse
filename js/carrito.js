@@ -18,7 +18,21 @@ function obtenerCantidadStorage(){
 };
 
 
-/** Inicio del proceso para agregar camisetas al carrito **/
+function elegirTalle(){
+    let botonesTalle = document.querySelectorAll('.talle');
+    botonesTalle.forEach(botonTalle => {
+            botonTalle.addEventListener("click", function(e){
+                const talle = e.target.id;
+                const card = e.target.closest('.card');
+                const habilitarCompra = card.querySelector('.buy');
+                habilitarCompra.removeAttribute('disabled');
+                habilitarCompra.setAttribute("id",talle);
+                });   
+    });
+
+    comprar();
+}
+
 
 function comprar(){
     let botonComprar = document.querySelectorAll('.buy');
@@ -30,27 +44,29 @@ function comprar(){
 
 function capturarDatosCamiseta(event){
     const boton = event.target;
+    const talleCamiseta= event.target.id;
     const datosCamiseta = boton.closest('.card');
-    let nombreCamiseta = datosCamiseta.querySelector('.camiseta').textContent;
-    let precioCamiseta = parseInt(datosCamiseta.querySelector('.precio').textContent);
+    const nombreCamiseta = datosCamiseta.querySelector('.camiseta').textContent;
+    const precioCamiseta = parseInt(datosCamiseta.querySelector('.precio').textContent);
     
-    agregarCamisetasAlCarrito(nombreCamiseta,precioCamiseta);
+    agregarCamisetasAlCarrito(nombreCamiseta,precioCamiseta,talleCamiseta);
 }
 
 
 
-function agregarCamisetasAlCarrito(nombreCamiseta,precioCamiseta){
+function agregarCamisetasAlCarrito(nombreCamiseta,precioCamiseta,talleCamiseta){
     if(carritoDeCompras == null){
         carritoDeCompras = [];
-        let compra = {camiseta:nombreCamiseta, precioCamiseta: precioCamiseta, cantidad:1};
+        let compra = {camiseta:nombreCamiseta, precioCamiseta: precioCamiseta, talleCamiseta, cantidad:1};
         carritoDeCompras.push(compra); 
     }else{
-        let existeCamiseta = carritoDeCompras.find((cam) => cam.camiseta == nombreCamiseta);
+        let existeCamiseta = carritoDeCompras.find((cam) => cam.talleCamiseta == talleCamiseta);
         if(existeCamiseta == undefined){
-            let compra = {camiseta:nombreCamiseta, precioCamiseta: precioCamiseta, cantidad:1};
+            let compra = {camiseta:nombreCamiseta, precioCamiseta: precioCamiseta, talleCamiseta: talleCamiseta, cantidad:1};
             carritoDeCompras.push(compra);
             if(!carritoOculto){
                 $('#elementos-carrito').append(agregarHTMLcarrito(compra));
+                botonBorrarItem();
             } 
         }else{
             existeCamiseta.cantidad+=1;
@@ -85,10 +101,15 @@ function verCarrito(){
 }
         
 function agregarHTMLcarrito(camiseta){
-        let html =        `<div id="carrito${camiseta.camiseta}" class="row d-flex align-items-center my-4 pb-5 px-4 item">
-                            <div class="col-4">
+        let html =        `<div id="carrito${camiseta.camiseta}" class="row  d-flex align-items-center my-4 pb-5 px-5 item elemento-carrito ">
+                            <div class="col-3">
                                 <div class="carrito-item">
                                     <img class="carrito-img" src="${imagenes[(camiseta.camiseta).replace(" ","")]}" alt=""></img>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <div class="talle-item">
+                                    <p>${camiseta.talleCamiseta.split(" ")[0]}</p>
                                 </div>
                             </div>
                             <div class="col-3">

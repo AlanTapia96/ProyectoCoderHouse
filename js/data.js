@@ -3,7 +3,7 @@ const iva = 0.21;
 const variedadCamisetas = {argentina:["Boca Juniors","River Plate","Independiente","Racing","San Lorenzo"],
                     brasil: ["Santos","Palmeiras","Flamengo","Fluminense","Gremio","Corinthians"],
                     españa: ["Barcelona","Real Madrid","Atletico Madrid"],
-                    italia: ["Juventus","Milan","Inter","Nápoli"]};
+                    italia: ["Juventus","Milan","Inter","Napoli"]};
 
 
 const imagenes = {
@@ -18,13 +18,13 @@ const imagenes = {
     Fluminense: "/ProyectoFinal/images/camisetas/fluminense.jpg",
     Gremio: "/ProyectoFinal/images/camisetas/gremio.jpg",
     Corinthians: "/ProyectoFinal/images/camisetas/corinthians.jpg",
-    Barcelona: "/ProyectoFinal/images/camisetas/barcelona.jpg",
+    Barcelona: "/ProyectoFinal/images/camisetas/barcelona-3.jpg",
     RealMadrid: "/ProyectoFinal/images/camisetas/real-madrid.jpg",
     AtleticoMadrid: "/ProyectoFinal/images/camisetas/atletico-madrid.jpg",
     Juventus: "/ProyectoFinal/images/camisetas/juventus.jpg",
     Milan: "/ProyectoFinal/images/camisetas/milan.jpg",
     Inter: "/ProyectoFinal/images/camisetas/inter.jpg",
-    Napoli: "/ProyectoFinal/images/camisetas/napoli.jpg"
+    Napoli: "/ProyectoFinal/images/camisetas/napoli.jpg",
 }
 
 

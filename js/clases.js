@@ -1,11 +1,13 @@
 class Camiseta{
-    constructor(club,pais,cantidad,talle){
+    constructor(club,pais,cant){
         this.club = club;
         this.pais = pais;
-        this.cantidad = cantidad;
-        this.talle = talle;
+        this.cantXs = cant;
+        this.cantS = cant;
+        this.cantM = cant;
+        this.cantL = cant;
+        this.cantxL = cant;
         this.precio = 1500; //Precio estandar hasta el momento para todas las camisetas
-
     }
 
     modificarPrecio(precio){
@@ -24,13 +26,30 @@ class Camiseta{
         return this.club;
     }
 
-    devolverCantidad(){
-        return this.cantidad;
+    operarCantidad(talle,accion,cantidad){
+        if(accion === "agregar"){
+            if(talle = "Xs") this.cantXs += cantidad
+            else if (talle = "S") this.cantS +=cantidad
+            else if (talle = "M") this.cantM += cantidad;
+            else if (talle = "L") this.cantL += cantidad;    
+            else this.cantxL += 1;
+        }else if (accion === "restar"){
+            if(talle = "Xs") this.cantXs -= cantidad
+            else if (talle = "S") this.cantS -=cantidad
+            else if (talle = "M") this.cantM -= cantidad;
+            else if (talle = "L") this.cantL -= cantidad;    
+            else this.cantxL -= cantidad;
+        }
     }
 
-    devolverTalle(){
-        return this.talle;
+    devolverCantidad(talle){
+            if(talle = "Xs") return this.cantXs;
+            else if (talle = "S") return this.cantS;
+            else if (talle = "M") return this.cantM;
+            else if (talle = "L") return this.cantL;    
+            else this.cantxL += 1;
     }
+
 
     devolverPrecio(){
         return this.precio;

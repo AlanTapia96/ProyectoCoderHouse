@@ -54,14 +54,18 @@
     </div>
   </header>
   
-  <section class="row-carrito">
+  
+  <section class="carritoCompras">
     <div id="carrito" class="container">
      <div id="plantilla-carrito">
        <div class="row d-flex align-items-center px-5 py-4">
-         <div class="col-4 border-bottom">
+         <div class="col-3 border-bottom">
              <h4>Camiseta</h4>
          </div>
-         <div class="col-3 border-bottom">
+         <div class="col-1 border-bottom">
+            <h4>Talle</h4>
+        </div>
+         <div class="col-3 border-bottom text-center">
              <h4>Precio unitario</h4>
          </div>
          <div class="col-2 border-bottom">
@@ -81,7 +85,7 @@
    
   </section>
 
-      <div id="carousel" class="carousel slide" data-ride="carousel">
+    <section id="carousel" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carousel" data-slide-to="0" class="active"></li>
             <li data-target="#carousel" data-slide-to="1"></li>
@@ -109,59 +113,63 @@
           </a>
             <div id="titulo-principal" class="titulo position-absolute">
             </div>
-      </div>
+    </section>
         
+    <section id="search" class="mt-5">
+      <form class="form-inline my-2 my-lg-0">
+        <div class="mr-auto ml-auto col-8 d-flex justify-content-center">
+          <input id="input-search" class="form-control col-5" type="search" placeholder="Busque la camiseta deseada">
+          <button id="submit-search" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </div>
+      </form>
+      <div id="result">
 
+      </div>
+    </section>
  
        
    
-      <section>
-        
+      <section id="choose" class="mt-5">
+        <article id="paises">
+            <h2 class="text-center">Elija el país de la camiseta que desea</h2>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <div id="argentina" class="contenedor m-auto">
+                           <a href="#camisetas"><img src="/ProyectoFinal/images/paises/Argentina.png" class="img-fluid" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                      <div id="italia" class="contenedor m-auto">
+                          <a href="#camisetas"><img src="/ProyectoFinal/images/paises/italy.png" class="img-fluid" alt=""></a>
+                         
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                      <div id="brasil" class="contenedor m-auto">
+                          <a href="#camisetas"><img src="/ProyectoFinal/images/paises/brasil.png" class="img-fluid" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                      <div id="españa" class="contenedor m-auto">
+                        <a href="#camisetas"><img src="/ProyectoFinal/images/paises/spain.png" class="img-fluid" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="camisetas" class="d-flex justify-content-center flex-wrap container">
+          
+  
+
+        </article>
       </section>
-      <section id="paises">
-          <h2 class="text-center">Elija el país de la camiseta que desea</h2>
-          <div class="container mt-5">
-              <div class="row">
-                  <div class="col-md-6 col-xs-12">
-                      <div id="argentina" class="contenedor m-auto">
-                         <a href="#camisetas"><img src="/ProyectoFinal/images/paises/Argentina.png" class="img-fluid" alt=""></a>
-                      </div>
-                  </div>
-                  <div class="col-md-6 col-xs-12">
-                    <div id="italia" class="contenedor m-auto">
-                        <a href="#camisetas"><img src="/ProyectoFinal/images/paises/italy.png" class="img-fluid" alt=""></a>
-                       
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-6 col-xs-12">
-                    <div id="brasil" class="contenedor m-auto">
-                        <a href="#camisetas"><img src="/ProyectoFinal/images/paises/brasil.png" class="img-fluid" alt=""></a>
-                      </div>
-                  </div>
-                  <div class="col-md-6 col-xs-12">
-                    <div id="españa" class="contenedor m-auto">
-                      <a href="#camisetas"><img src="/ProyectoFinal/images/paises/spain.png" class="img-fluid" alt=""></a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
       
       
 
-      <section id="camisetas" class="my-5 py-5 d-flex justify-content-around flex-wrap container"></section>
-
-      </section>
-      
-
-      
-
-      
-
-
-      
 
       <section id="contacto" class="my-5 container-fluid pb-5">
         <div class="row d-flex flex-nowrap align-content-center justify-content-center container-fluid h-100">
@@ -249,22 +257,27 @@
     
     
 </body>
+
 <!-- BOOTSTRAP 4 -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script  src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+<script src="./js/carrito.js"></script>
+<script src="./js/main.js"></script>
 <script src="./js/animaciones.js"></script>
-<script src="/ProyectoFinal/js/carrito.js"></script>
-<script src="/ProyectoFinal/js/main.js"></script>
-<script src="/ProyectoFinal/js/animaciones.js"></script>
+<script src="./js/buscador.js"></script>
 </html>
 
 
 
-<!-- Agregar filtro para buscar camisetas
+<!-- 
+  Agregar filtro para buscar camisetas
   Agregar ordenar por nombre/pais/precio. Ver función reduce para ordenar objetos (ordenar)
   Agregar boton para desplegar todas las camisetas disponibles
   Agregar algo que no permita comprar si no hay stock
   Ver si implementar SPA
+  agregar ordenamiento por precio/pais/
+  agregar mostrar todas las camisetas
+  responsive
 -->

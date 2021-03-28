@@ -14,8 +14,16 @@ function obtenerCantidadStorage(){
     }else{
         return 0;
     }
-    
 };
+
+function obtenerImporteStorage(){
+    let importe = localStorage.getItem("importe");
+    if(importe > 0 ){
+        return parseFloat(importe);
+    }else{
+        return 0;
+    }
+}
 
 
 function elegirTalle(){
@@ -58,7 +66,7 @@ function agregarCamisetasAlCarrito(nombreCamiseta,precioCamiseta,talleCamiseta){
     if(carritoDeCompras == null){
         carritoDeCompras = [];
         let compra = {camiseta:nombreCamiseta, precioCamiseta: precioCamiseta, talleCamiseta, cantidad:1};
-        carritoDeCompras.push(compra); 
+        carritoDeCompras.push(compra);
     }else{
         let existeCamiseta = carritoDeCompras.find((cam) => cam.talleCamiseta == talleCamiseta);
         if(existeCamiseta == undefined){
@@ -76,8 +84,10 @@ function agregarCamisetasAlCarrito(nombreCamiseta,precioCamiseta,talleCamiseta){
         }
     } 
     cantidadCarrito += 1;  
+    importeTotal += precioCamiseta;
     localStorage.setItem("carrito",JSON.stringify(carritoDeCompras));
     localStorage.setItem("cantidad",cantidadCarrito);
+    localStorage.setItem("importe",importeTotal);
       
 }
 
@@ -89,6 +99,10 @@ function verCarrito(){
         for (const camisetaCarrito of carritoDeCompras) {
             carritoHTML += agregarHTMLcarrito(camisetaCarrito);                    
         }
+        let importeHTML = `<div>
+                            <h4 id="h4-importe">Importe total: ${importeTotal}</h4>
+                            </div>`;                      
+        $('#elementos-carrito').append(importeHTML);        
         elementosCarrito.innerHTML += carritoHTML;
         let vaciarCarritoBoton = document.querySelector('#vaciarCarrito');
         vaciarCarritoBoton.onclick = vaciarCarrito;
@@ -101,30 +115,28 @@ function verCarrito(){
 }
         
 function agregarHTMLcarrito(camiseta){
-        let html =        `<div id="carrito${camiseta.camiseta}" class="row  d-flex align-items-center my-4 pb-5 px-5 item elemento-carrito ">
-                            <div class="col-3">
-                                <div class="carrito-item">
-                                    <img class="carrito-img" src="${imagenes[(camiseta.camiseta).replace(" ","")]}" alt=""></img>
+        let html =        `<div id="carrito${camiseta.camiseta}" class="row  d-flex align-items-center justify-content-around text-center my-4 pb-5 item text-center">
+                                <div class="col-3">
+                                    <div class="carrito-item">
+                                        <img class="carrito-img" src="${imagenes[(camiseta.camiseta).replace(" ","")]}" alt=""></img>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-1">
-                                <div class="talle-item">
-                                    <p>${camiseta.talleCamiseta.split(" ")[0]}</p>
+                                <div class="col-1">
+                                    <div class="talle-item">
+                                        <p>${camiseta.talleCamiseta.split(" ")[0]}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <p>${camiseta.precioCamiseta}</p>
-                            </div>
-                            <div class="col-2">
-                                <div class="d-flex justify-content-between"> 
-                                    <input id="cantidad${camiseta.camiseta}" value="${camiseta.cantidad}" class="w-25 h-25">
+                                <div class="col-3 precio">
+                                    <p>${camiseta.precioCamiseta}</p>
                                 </div>
-                            </div>
-                            <div class="col-1">
-                                    <button id="eliminar${camiseta.camiseta}" class="btn btn-danger botonEliminar">X</button>
+                                <div class="col-2">
+                                    <p id="cantidad${camiseta.camiseta}" class="w-25 h-25 mr-auto ml-auto">${camiseta.cantidad}</p>
                                 </div>
-                            </div>
-                        </div>`
+                                <div class="col-1">
+                                        <button id="eliminar${camiseta.camiseta}" class="btn btn-danger botonEliminar">X</button>
+                                    </div>
+                                </div>
+                            </div>`
                 botonBorrarItem();
         return html;
 }        
@@ -156,6 +168,9 @@ function eliminarItemCarrito(event){
         carritoDeCompras.splice(posicionCamisetaEnCarrito,1);
         botonClickeado.closest('.item').remove();
     }
+    importeTotal -= botonClickeado.closest('.item').querySelector('.precio').textContent;
+    document.getElementById('h4-importe').innerHTML = importeTotal;
+    
     if(cantidadCarrito > 0){
         cantidadCarrito -= 1;
     };
@@ -168,9 +183,11 @@ function eliminarItemCarrito(event){
 function vaciarCarrito() {
     carritoDeCompras = [];
     cantidadCarrito = 0;
+    importeTotal = 0;
     let camisetasCarrito = document.querySelector('#elementos-carrito');
     camisetasCarrito.innerHTML = "";
 
     localStorage.setItem("carrito",JSON.stringify(carritoDeCompras));
     localStorage.setItem("cantidad",cantidadCarrito);  
+    localStorage.setItem("importe",importeTotal);
 }

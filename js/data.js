@@ -31,6 +31,6 @@ const imagenes = {
 const stockCamisetas = [];
 var carritoDeCompras;
 var cantidadCarrito;
-let importe = [];
+var importeTotal;
 
 

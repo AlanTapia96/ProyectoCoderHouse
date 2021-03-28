@@ -85,6 +85,37 @@ function generarCamisetasEvento(id,variedadCamisetas){
     }
 
 
+    for (const idPais in variedadCamisetas) {
+        let clickPais = document.getElementById(idPais);
+        clickPais.onclick = () => generarCamisetasEvento(idPais,variedadCamisetas,stockCamisetas);
+    }
+    
+    
+    $('#btnCarrito').click(function(){
+        $('#carrito').toggle("slow",verCarrito);
+    });
+
+
+     $('#buttonAllShirts').click(function(){
+        
+        $('#showAllShirts').toggle("slow",showAllShirtsEvent);
+        
+    });
+
+
+    /*<option>Orden alfabético</option>
+                                        <option>Mayor Precio</option>
+                                        <option>Menor Precio</option>
+                                        <option>País</option>*/
+
+    
+    
+
+    
+
+
+
+
 /******************************** API Provincias/Municipios *************************************** */
 
 const url_provincias = "https://apis.datos.gob.ar/georef/api/provincias";
@@ -93,7 +124,7 @@ $.get(url_provincias, function(respuesta,estado) {
         if(estado === "success"){
             let provinciasApi = respuesta.provincias;
             let provincias = document.getElementById("provincias");
-            let provinciasHTML = "<option disabled selected>Selecciona una opción</option>";
+            let provinciasHTML = "<option disabled selected value=''>Selecciona una provincia</option>";
             for (const provincia of provinciasApi) {
                 provinciasHTML += `<option id="${provincia.id}" class="provincia">${provincia.nombre}</option>`;
             }
@@ -105,7 +136,7 @@ $.get(url_provincias, function(respuesta,estado) {
                     if(estado2 === "success"){
                         let municipiosApi = respuesta2.departamentos;
                         let municipios    = document.getElementById("municipios");
-                        let municipiosHTML =  "<option disabled selected>Selecciona una opción</option>";
+                        let municipiosHTML =  "<option disabled selected value=''>Selecciona un municipio</option>";
                         for (const municipio of municipiosApi){
                             municipiosHTML += `<option id="${municipio.id}" class="provincia">${municipio.nombre}</option>`
                         }
@@ -119,34 +150,26 @@ $.get(url_provincias, function(respuesta,estado) {
         }
     });
 
-
+    
  
 
 /*********************************** MAIN ***********************************/
 
 instantiateShirts(stockCamisetas,20);
-
-
 welcome();
 buscador();
 carritoDeCompras = obtenerCarritoStorage();
 cantidadCarrito = obtenerCantidadStorage();
-
-for (const idPais in variedadCamisetas) {
-    let clickPais = document.getElementById(idPais);
-    clickPais.onclick = () => generarCamisetasEvento(idPais,variedadCamisetas,stockCamisetas);
-}
-
-
-$('#btnCarrito').click(function(){
-    $('#carrito').toggle("slow",verCarrito);
-}
- );
-
+importeTotal = obtenerImporteStorage();
 
 formulario();
 
-})
+
+
+
+
+
+});
 
 /*Función global para ser reconocida por buscador.js*/
 
@@ -178,6 +201,20 @@ function renderCamisetas(camiseta){
             </div>`
     return html;
 }
+
+function showAllShirtsEvent(){
+    const all = document.getElementById("listShirts");
+    html = "<div id='total' class='d-flex justify-content-center flex-wrap container'>";
+    for (const shirt of stockCamisetas) {
+        shirtToShow = shirt.devolverClub();
+        html += renderCamisetas(shirtToShow);
+    }
+    html += "</div>"
+    all.innerHTML += html;
+    elegirTalle();
+    sortShirts();
+    
+    };
 
 //Los datos del formulario guardarlos en algún lugar (array / objeto)
 

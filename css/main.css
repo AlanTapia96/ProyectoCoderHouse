@@ -191,6 +191,7 @@ a{
 .carrito-item{
     width: 8em;
     height: 8em;
+    margin: 0 auto;
 }
 
 .carrito-img{
@@ -199,9 +200,9 @@ a{
     object-fit: cover;
 }
 
-.elemento-carrito{
+/* .elemento-carrito{
     border-bottom: .1px solid lightslategray;
-}
+} */
 
 
 .row{

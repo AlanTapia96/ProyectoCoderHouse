@@ -13,18 +13,21 @@ function buscador(){
                 listaString[i] = listaString[i].replace(listaString[i][0],primeraLetra);
             }
             busqueda = listaString.join(" ");
-        }
+        
         listaMap = stockCamisetas.filter(x => x.devolverClub().includes(busqueda));
         result = document.getElementById("result");
         html = "<div class='d-flex justify-content-center flex-row mt-5'>";
-        for (const camisetaObj of listaMap) {
-            camiseta = camisetaObj.devolverClub();
-            html += renderCamisetas(camiseta);
+        if(listaMap.length > 0){
+            for (const camisetaObj of listaMap) {
+                camiseta = camisetaObj.devolverClub();
+                html += renderCamisetas(camiseta);
+            }
+        }else{
+            html += `<h4>No se encontró ninguna camiseta</h4>`
         }
         html += "</div>"
         result.innerHTML = html;
-
         elegirTalle();
-    });
+    } });
     
 }

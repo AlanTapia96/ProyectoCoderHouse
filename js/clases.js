@@ -7,7 +7,10 @@ class Camiseta{
         this.cantM = cant;
         this.cantL = cant;
         this.cantxL = cant;
-        this.precio = 1500; //Precio estandar hasta el momento para todas las camisetas
+        if(pais === "argentina") this.precio = 2550;
+        else if (pais === "brasil") this.precio = 2250;
+        else if (pais === "italia") this.precio = 2100;
+        else this.precio = 2000;
     }
 
     modificarPrecio(precio){

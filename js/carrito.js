@@ -1,6 +1,5 @@
 var carritoOculto = true;
 
-/**Inicialmente se obtiene el carrito cargado en Storage **/
 
 function obtenerCarritoStorage(){
     let carritoStorage = JSON.parse(localStorage.getItem("carrito"));
@@ -43,7 +42,7 @@ function elegirTalle(){
 
 
 function comprar(){
-    let botonComprar = document.querySelectorAll('.buy');
+    const botonComprar = document.querySelectorAll('.buy');
         botonComprar.forEach( boton =>{
                 boton.addEventListener("click",capturarDatosCamiseta)
         }
@@ -79,12 +78,13 @@ function agregarCamisetasAlCarrito(nombreCamiseta,precioCamiseta,talleCamiseta){
         }else{
             existeCamiseta.cantidad+=1;
             if(!carritoOculto){
-                document.getElementById(`cantidad${nombreCamiseta}`).value = existeCamiseta.cantidad;
+                document.getElementById(`cantidad${nombreCamiseta}`).innerHTML = existeCamiseta.cantidad;
             }
         }
     } 
     cantidadCarrito += 1;  
     importeTotal += precioCamiseta;
+    $('#h4-importe').html(` ${importeTotal}`);
     localStorage.setItem("carrito",JSON.stringify(carritoDeCompras));
     localStorage.setItem("cantidad",cantidadCarrito);
     localStorage.setItem("importe",importeTotal);
@@ -98,11 +98,8 @@ function verCarrito(){
     if(carritoOculto){
         for (const camisetaCarrito of carritoDeCompras) {
             carritoHTML += agregarHTMLcarrito(camisetaCarrito);                    
-        }
-        let importeHTML = `<div>
-                            <h4 id="h4-importe">Importe total: ${importeTotal}</h4>
-                            </div>`;                      
-        $('#elementos-carrito').append(importeHTML);        
+        }                 
+        $('#h4-importe').html(` ${importeTotal}`);
         elementosCarrito.innerHTML += carritoHTML;
         let vaciarCarritoBoton = document.querySelector('#vaciarCarrito');
         vaciarCarritoBoton.onclick = vaciarCarrito;
@@ -169,8 +166,8 @@ function eliminarItemCarrito(event){
         botonClickeado.closest('.item').remove();
     }
     importeTotal -= botonClickeado.closest('.item').querySelector('.precio').textContent;
-    document.getElementById('h4-importe').innerHTML = importeTotal;
-    
+    $('#h4-importe').html(` ${importeTotal}`);
+     
     if(cantidadCarrito > 0){
         cantidadCarrito -= 1;
     };
@@ -186,7 +183,7 @@ function vaciarCarrito() {
     importeTotal = 0;
     let camisetasCarrito = document.querySelector('#elementos-carrito');
     camisetasCarrito.innerHTML = "";
-
+    $('#h4-importe').html(` ${importeTotal}`);
     localStorage.setItem("carrito",JSON.stringify(carritoDeCompras));
     localStorage.setItem("cantidad",cantidadCarrito);  
     localStorage.setItem("importe",importeTotal);

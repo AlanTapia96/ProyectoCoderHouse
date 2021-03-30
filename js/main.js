@@ -1,174 +1,161 @@
 $(document).ready(function(){
 
-function welcome() {
-    if(localStorage.getItem("nombre") == null){
-        localStorage.setItem("nombre",prompt("Por favor, ingrese su nombre"));
-    }
-    
-    let welcome = document.getElementById("welcome");
-    let names = localStorage.getItem("nombre");
-    welcome.innerHTML = `¡Bienvenido/a, ${names}!`;
-    $('.div-welcome').fadeIn('slow');
-}
-
-/* Función para crear todos los objetos*/
-function instantiateShirts(stock,cantidad){
-    for (const pais in variedadCamisetas) {
-         let listaPais = variedadCamisetas[pais];
-        for (let i=0; i<listaPais.length;i++){
-            let camiseta = listaPais[i];
-            let nuevaCamiseta = new Camiseta(camiseta,pais,cantidad);
-            stock.push(nuevaCamiseta);
+    function bienvenida() {
+        if(localStorage.getItem("nombre") == null){
+            localStorage.setItem("nombre",prompt("Por favor, ingrese su nombre"));
         }
-    }
-}
-
-function costoCamiseta(costo){
-    let costoTotal = costo + (costo*iva);
-    return costoTotal;
-}
-
-
-function aumento(lista,aumento) {
-    lista.map(camiseta => camiseta.modificarPrecio(camiseta.devolverPrecio()*aumento));    
-}
-
-
-
-/*********************************EVENTOS******************************************/
-
-
-function formulario(e){
-    let datos = [];
-    $('#contacto').submit(function (e) { 
-        e.preventDefault();
-        let nombre = $('#nombre').val();
-        let mail = $('#email').val();
-        let text = $('#text').val();
-        datos.push(nombre,mail,text);
-        nombre = document.getElementById("nombre");
-        mail = document.getElementById("email");
-        text = document.getElementById("text");
-        nombre.value = mail.value = text.value = "";
-        $('#contacto').append("<div id='success' class='position-relative'></div>");
         
-        gsap.from('#success',{
-            y: -80,
-        })
-        $('#success').html("<div class='text-center mt-2'><h3 class=''>¡Formulario enviado con éxito!</h3></div>")
-        gsap.to('#success',{
-            duration: 1,
-            y: 5,
-            ease: 'none'
-        })    
-    });
-    
-}
+        let welcome = document.getElementById("welcome");
+        let names = localStorage.getItem("nombre");
+        welcome.innerHTML = `¡Bienvenido/a, ${names}!`;
+        $('.div-welcome').fadeIn('slow');
+    }
 
-
-
-function generarCamisetasEvento(id,variedadCamisetas){ 
-    let padre = document.getElementById("camisetas");
-    let html = '';
-    for (const camisetaPais in variedadCamisetas) {
-        if (camisetaPais == id){
-            let listaPais = variedadCamisetas[camisetaPais];
-            for(let i=0; i<listaPais.length;i++){
-                camiseta = listaPais[i];
-                console.log(camiseta);
-                html += renderCamisetas(camiseta);
-                }
+    /* Función para crear todos los objetos*/
+    function instanciarCamisetas(stock,cantidad){
+        for (const pais in variedadCamisetas) {
+            let listaPais = variedadCamisetas[pais];
+            for (let i=0; i<listaPais.length;i++){
+                let camiseta = listaPais[i];
+                let nuevaCamiseta = new Camiseta(camiseta,pais,cantidad);
+                stock.push(nuevaCamiseta);
             }
         }
-       padre.innerHTML = html;
-       elegirTalle();
+    }
+
+    function costoCamiseta(costo){
+        let costoTotal = costo + (costo*iva);
+        return costoTotal;
     }
 
 
-    for (const idPais in variedadCamisetas) {
-        let clickPais = document.getElementById(idPais);
-        clickPais.onclick = () => generarCamisetasEvento(idPais,variedadCamisetas,stockCamisetas);
+    function aumento(lista,aumento) {
+        lista.map(camiseta => camiseta.modificarPrecio(camiseta.devolverPrecio()*aumento));    
     }
-    
-    
-    $('#btnCarrito').click(function(){
-        $('#carrito').toggle("slow",verCarrito);
-    });
 
 
-     $('#buttonAllShirts').click(function(){
+
+    /*********************************EVENTOS******************************************/
+
+
+    function formulario(e){
+        let datos = [];
+        $('#contacto').submit(function (e) { 
+            e.preventDefault();
+            let nombre = $('#nombre').val();
+            let mail = $('#email').val();
+            let text = $('#text').val();
+            datos.push(nombre,mail,text);
+            nombre = document.getElementById("nombre");
+            mail = document.getElementById("email");
+            text = document.getElementById("text");
+            nombre.value = mail.value = text.value = "";
+            $('#contacto').append("<div id='success' class='position-relative'></div>");
+            
+            gsap.from('#success',{
+                y: -80,
+            })
+            $('#success').html("<div class='text-center mt-2'><h3 class=''>¡Formulario enviado con éxito!</h3></div>")
+            gsap.to('#success',{
+                duration: 1,
+                y: 5,
+                ease: 'none'
+            })    
+        });
         
-        $('#showAllShirts').toggle("slow",showAllShirtsEvent);
-        
-    });
-
-
-    /*<option>Orden alfabético</option>
-                                        <option>Mayor Precio</option>
-                                        <option>Menor Precio</option>
-                                        <option>País</option>*/
-
-    
-    
-
-    
+    }
 
 
 
-
-/******************************** API Provincias/Municipios *************************************** */
-
-const url_provincias = "https://apis.datos.gob.ar/georef/api/provincias";
-
-$.get(url_provincias, function(respuesta,estado) {
-        if(estado === "success"){
-            let provinciasApi = respuesta.provincias;
-            let provincias = document.getElementById("provincias");
-            let provinciasHTML = "<option disabled selected value=''>Selecciona una provincia</option>";
-            for (const provincia of provinciasApi) {
-                provinciasHTML += `<option id="${provincia.id}" class="provincia">${provincia.nombre}</option>`;
-            }
-            provincias.innerHTML = provinciasHTML;
-            let seleccion = document.getElementById("provincias");
-            seleccion.onchange = function(){
-                let provinciaElegida = seleccion.value;
-                $.get(`https://apis.datos.gob.ar/georef/api/departamentos?provincia=${provinciaElegida}&campos=id,nombre&max=4000`,function(respuesta2,estado2){
-                    if(estado2 === "success"){
-                        let municipiosApi = respuesta2.departamentos;
-                        let municipios    = document.getElementById("municipios");
-                        let municipiosHTML =  "<option disabled selected value=''>Selecciona un municipio</option>";
-                        for (const municipio of municipiosApi){
-                            municipiosHTML += `<option id="${municipio.id}" class="provincia">${municipio.nombre}</option>`
-                        }
-                        municipios.innerHTML = municipiosHTML;
+    function generarCamisetasEvento(id,variedadCamisetas){ 
+        let padre = document.getElementById("camisetas");
+        let html = '';
+        for (const camisetaPais in variedadCamisetas) {
+            if (camisetaPais == id){
+                let listaPais = variedadCamisetas[camisetaPais];
+                for(let i=0; i<listaPais.length;i++){
+                    camiseta = listaPais[i];
+                    console.log(camiseta);
+                    html += renderCamisetas(camiseta);
                     }
                 }
-                )
             }
-        }else{
-            console.log("No se pudo procesar");
+        padre.innerHTML = html;
+        elegirTalle();
         }
-    });
 
+
+        for (const idPais in variedadCamisetas) {
+            let clickPais = document.getElementById(idPais);
+            clickPais.onclick = () => generarCamisetasEvento(idPais,variedadCamisetas,stockCamisetas);
+        }
+        
+        
+        $('#btnCarrito').click(function(){
+            $('#carrito').toggle("slow",verCarrito);
+        });
+
+
+        $('#buttonAllShirts').click(function(){
+            $('#showAllShirts').toggle("slow",showAllShirtsEvent);
+
+        });
+
+
+        
+        
+
+        
+
+
+
+
+    /******************************** API Provincias/Municipios *************************************** */
+
+    const url_provincias = "https://apis.datos.gob.ar/georef/api/provincias";
+
+    $.get(url_provincias, function(respuesta,estado) {
+            if(estado === "success"){
+                let provinciasApi = respuesta.provincias;
+                let provincias = document.getElementById("provincias");
+                let provinciasHTML = "<option disabled selected value=''>Selecciona una provincia</option>";
+                for (const provincia of provinciasApi) {
+                    provinciasHTML += `<option id="${provincia.id}" class="provincia">${provincia.nombre}</option>`;
+                }
+                provincias.innerHTML = provinciasHTML;
+                let seleccion = document.getElementById("provincias");
+                seleccion.onchange = function(){
+                    let provinciaElegida = seleccion.value;
+                    $.get(`https://apis.datos.gob.ar/georef/api/departamentos?provincia=${provinciaElegida}&campos=id,nombre&max=4000`,function(respuesta2,estado2){
+                        if(estado2 === "success"){
+                            let municipiosApi = respuesta2.departamentos;
+                            let municipios    = document.getElementById("municipios");
+                            let municipiosHTML =  "<option disabled selected value=''>Selecciona un municipio</option>";
+                            for (const municipio of municipiosApi){
+                                municipiosHTML += `<option id="${municipio.id}" class="provincia">${municipio.nombre}</option>`
+                            }
+                            municipios.innerHTML = municipiosHTML;
+                        }
+                    }
+                    )
+                }
+            }else{
+                console.log("No se pudo procesar");
+            }
+        });
+
+        
     
- 
 
-/*********************************** MAIN ***********************************/
+    /*********************************** MAIN ***********************************/
 
-instantiateShirts(stockCamisetas,20);
-welcome();
-buscador();
-carritoDeCompras = obtenerCarritoStorage();
-cantidadCarrito = obtenerCantidadStorage();
-importeTotal = obtenerImporteStorage();
-
-formulario();
-
-
-
-
-
-
+    instanciarCamisetas(stockCamisetas,20);
+    bienvenida();
+    buscador();
+    carritoDeCompras = obtenerCarritoStorage();
+    cantidadCarrito = obtenerCantidadStorage();
+    importeTotal = obtenerImporteStorage();
+    formulario();
 });
 
 /*Función global para ser reconocida por buscador.js*/

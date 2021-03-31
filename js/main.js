@@ -101,6 +101,10 @@ $(document).ready(function(){
 
         });
 
+        $('#buttonCountries').click(function(){
+            $('#paises').toggle("slow",showAllShirtsEvent);
+
+        });
 
         
         
@@ -161,16 +165,16 @@ $(document).ready(function(){
 /*Función global para ser reconocida por buscador.js*/
 
 function renderCamisetas(camiseta){
-    if(camiseta.includes(" ")){
-        camiseta = camiseta.replace(" ", "");
-    }
-    let html =  `  
-            <div class="card card-camiseta my-3 mr-2">
+    
+    let html =  `<div class="card card-camiseta my-3 mr-2">
                 <div class="card-body d-flex align-items-center flex-column">
                     <div class="h4-card">
                         <h4 class="card-text camiseta text-center">${camiseta}</h4>
-                    </div>
-                    <div class="img-card">
+                    </div>`
+                    if(camiseta.includes(" ")){
+                        camiseta = camiseta.replace(" ", "");
+                    }
+        html+=    `<div class="img-card">
                         <img class="img-fluid img" src="${imagenes[camiseta]}">
                     </div>
                     <div class="talles-card">
@@ -188,6 +192,8 @@ function renderCamisetas(camiseta){
             </div>`
     return html;
 }
+
+//<h4 class="precio">${stockCamisetas.find(cam => cam.devolverClub().replace(" ", "") == camiseta).devolverPrecio()}</h4>
 
 function showAllShirtsEvent(){
     const all = document.getElementById("listShirts");

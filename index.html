@@ -101,10 +101,10 @@
               <img src="/ProyectoFinal/images/1.jpg" class="d-block img-fluid img-1">
             </div>
             <div class="carousel-item">
-              <img src="/ProyectoFinal/images/10.jpg" class="d-block img-fluid" >
+              <img src="/ProyectoFinal/images/6.jpg" class="d-block img-fluid" >
             </div>
             <div class="carousel-item">
-              <img src="/ProyectoFinal/images/9.jpg" class="d-block img-fluid">
+              <img src="/ProyectoFinal/images/11.jpg" class="d-block img-fluid">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
@@ -132,30 +132,28 @@
     </section>
  
        
-    <section id="buttons">
-      <button id="buttonAllShirts">Mostrar todo</button>
-      <div id="showAllShirts" style="display:none">
-        <div class="form-group col-3" id="form-sort">
-         <label>Ordenar por</label>
-          <select class="form-control col-5" id="sort">
-              <option value='1'>dsasdasd</option>
-              <option value='2'>Orden alfabético</option>
-              <option value='3'>Mayor Precio</option>
-              <option value='4'>Menor Precio</option>
+    <section id="buttons" class="mt-5 container">
+      <button id="buttonAllShirts" class="btn-lg btn-dark mb-3 btn-block">Ver todas las camisetas</button>
+      <button id="buttonCountries" class="btn-lg btn-dark mb-3 btn-block">Seleccionar por paises</button>
+      <article id="showAllShirts" style="display:none">
+        <div class="form-group d-flex align-items-center col-5" id="form-sort">
+         <label class="mr-2 text-center">Ordenar por</label>
+          <select class="form-control col-6" id="sort">
+              <option hidden selected>Seleccione un orden</option>
+              <option value='1'>Orden alfabético Ascendente</option>
+              <option value='2'>Orden alfabético Descendente</option>
+              <option value='3'>Menor Precio</option>
+              <option value='4'>Mayor Precio</option>
               <option value='5'>País</option>
           </select>
         </div>
-        <!-- <button id="countries"></button> -->
-        
         <div id="listShirts"></div>
-      </div>
-    </section>
+      </article>
+      
 
-
-   
-      <section id="choose" class="mt-5">
-        <article id="paises">
-            <h2 class="text-center">Elija el país de la camiseta que desea</h2>
+      <!-- <section id="choose" class="mt-5"> -->
+        <article id="paises" style="display:none">
+            <h2 class="text-center">Seleccione el país de la camiseta que desea</h2>
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-6 col-xs-12">
@@ -184,13 +182,15 @@
                 </div>
             </div>
         </article>
-
         <article id="camisetas" class="d-flex justify-content-center flex-wrap container">
-          
-  
-
         </article>
       </section>
+
+    </section>
+
+
+   
+      
       
       
 

@@ -31,6 +31,7 @@ a{
 #carousel{
     position: relative;
     max-height: 100vh;
+    width: 100%;
     box-shadow: grey;
     -webkit-box-shadow: 0px 24px 55px -1px rgba(0,0,0,0.58);
     -moz-box-shadow: 0px 24px 55px -1px rgba(0,0,0,0.58);
@@ -53,21 +54,18 @@ a{
 }
 
 .carousel-item{
-    background-color: rgb(192, 108, 75);
+    /* background-color: rgb(192, 108, 75); */
+    background-color: rgb(43, 19, 9);
 }
 
 .carousel-item img{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     opacity: 0.9;
-    filter: grayscale(.7);
-    object-fit: contain;
+    filter: grayscale(.5);
+    object-fit: cover;
 }
 
-.carousel-item .img-1{
-    position: relative;
-    top: -4em;
-}
 
 #div-welcome{
     display: inline;
@@ -159,12 +157,7 @@ a{
     object-fit: contain;
 }
 
-#btn-carrito{
-    position: absolute;
-    display: inline-block;
-    height: 100%;
-    width: 5%;
-}
+
 
 .carritoCompras{
     margin-top: .3em;
@@ -201,6 +194,15 @@ a{
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+#btn-close{
+    position: absolute;
+    font-size: 1.5em;
+    top: 0;
+    right: 0;
+    margin: .2em .5em;
+    padding: .2em;
 }
 
 /* #importeCarrito{
@@ -241,6 +243,7 @@ a{
 
 
 footer{
+    padding: 2em 0;
     height: auto;
     background-color: black;
 }
@@ -255,23 +258,41 @@ footer{
     align-content: center;
     justify-content: center;
 }
+
+
+footer ul,footer h5{
+    margin:0
+}
+
+
+@media only screen and (min-width:1618px){
+    .img-1{
+        position: relative;
+        top: 2em;
+    }
 }
 
 @media only screen and (max-width:1618px){
-    .carousel-item .img-1{
-        position: relative;
-        top: 0em;
+    
+
+    .carousel-item img{
+        height: auto;
     }
 }
 
 @media only screen and (max-width:1199px){
     #carousel h1{
-        font-size: 3em;
+        margin-top: -.2em;
+        font-size: 2.7em;
     }
 
-    .carousel-item .img-1{
-        position: relative;
-        top: 0;
+
+    #carousel{
+        margin-top: 2em;
+    }
+
+    .carousel-item img{
+        height: 80vh;
     }
 
     .input-group-prepend{
@@ -286,10 +307,22 @@ footer{
         height: 20em;
         position: relative;
     }
+
+    #btnCarrito{
+        padding: 0;
+    }
+
+    #carousel{
+        margin-top: 3em;
+    }
    
     #carousel h1{
         font-size: 2em;
-        
+        margin-top: -.5em;
+    }
+
+    .carousel-item img{
+        height: 60vh;
     }
     
     .input-group-prepend{
@@ -298,16 +331,13 @@ footer{
 }
 
 @media only screen and (max-width:767px){
+
     #carousel h1{
         font-size: 1.7em;
     }
-
-    /* header{
-        height: 3em;
-    } */
-
-    .navbar div{
-        /* height: 5vh; */
+    
+    .carousel-item img{
+        height: 45vh;
     }
 
     .input-group-prepend{
@@ -321,14 +351,33 @@ footer{
 
 @media only screen and (max-width:575px){
     
+    #carousel{
+        margin-top: 4em;
+    }
 
     #carousel h1{
-        margin-top: 1em;
+        margin-top: -1em;
         font-size: 1.4em;
+    }
+
+    .carousel-item img{
+        height: 37vh;
     }
 
     .input-group-prepend{
         width: 20%;
+    }
+    
+    form h3{
+        font-size: 1.4em;
+    }
+
+    footer h5{
+        font-size: 1em;
+    }
+
+    footer > div > h5{
+        margin-right: 1em;
     }
 
 }

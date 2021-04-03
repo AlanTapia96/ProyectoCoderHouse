@@ -17,7 +17,6 @@
 
 </head>
 <body>
-
   <header class="bg-dark fixed-top">
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
@@ -56,39 +55,7 @@
   </header>
   
   
-  <section class="carritoCompras">
-    <div id="carrito" class="container">
-     <div id="plantilla-carrito">
-       <div class="row d-flex align-items-center justify-content-between text-center py-4">
-         <div class="col-3 border-bottom">
-             <h4>Camiseta</h4>
-         </div>
-         <div class="col-1 border-bottom">
-            <h4>Talle</h4>
-        </div>
-         <div class="col-3 border-bottom text-center">
-             <h4>Precio unitario</h4>
-         </div>
-         <div class="col-2 border-bottom">
-             <h4>Cantidad</h4>
-         </div>
-         <div class="col-1">
-             <button id="vaciarCarrito" class="btn btn-primary justify-content-center">Vaciar carrito</button>
-         </div>
-       </div> 
-     </div>
-      <div id="elementos-carrito" >
-      </div>
-      <div id="importeCarrito">
-        <h3 class="d-inline">Importe total:
-          <h4 id="h4-importe" class="d-inline">
   
-          </h4>
-      </h3>
-      </div>
-    </div>
-     
-  </section>
 
     <section id="carousel" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
@@ -99,10 +66,10 @@
           <div class="carousel-inner">
             
             <div class="carousel-item active">
-              <img src="./images/1.jpg" class="d-block img-fluid img-1">
+              <img src="./images/2.jpg" class="d-block img-fluid img-1" >
             </div>
             <div class="carousel-item">
-              <img src="./images/6.jpg" class="d-block img-fluid" >
+              <img src="./images/6.jpg" class="d-block img-fluid"  >
             </div>
             <div class="carousel-item">
               <img src="./images/11.jpg" class="d-block img-fluid">
@@ -118,6 +85,45 @@
           </a>
             <div id="titulo-principal" class="titulo position-absolute">
             </div>
+    </section>
+
+    <section class="carritoCompras">
+
+      <div id="carrito" class="container">
+        <button id="btn-close" class="btn"><i class="fas fa-times"></i></button>
+       <div id="plantilla-carrito" class="mt-4">
+         <div class="row d-flex align-items-center justify-content-between text-center py-4">
+           <div class="col-3 border-bottom">
+               <h4>Camiseta</h4>
+           </div>
+           <div class="col-1 border-bottom">
+              <h4>Talle</h4>
+          </div>
+           <div class="col-3 border-bottom text-center">
+               <h4>Precio unitario</h4>
+           </div>
+           <div class="col-2 border-bottom">
+               <h4>Cantidad</h4>
+           </div>
+           <div class="col-1">
+               <button id="vaciarCarrito" class="btn btn-primary justify-content-center">Vaciar carrito</button>
+           </div>
+         </div> 
+       </div>
+        <div id="elementos-carrito" >
+        </div>
+        <div id="importeCarrito">
+          <h3 class="d-inline">Importe total:
+            <h4 id="h4-importe" class="d-inline">
+    
+            </h4>
+        </h3>
+        </div>
+      </div>
+      <div class="position-absolute">
+        <h3>Holanda</h3>
+      </div>
+       
     </section>
         
     <section id="search" class="mt-5">
@@ -151,8 +157,6 @@
         <div id="listShirts"></div>
       </article>
       
-
-      <!-- <section id="choose" class="mt-5"> -->
         <article id="paises" style="display:none">
             <h2 class="text-center">Seleccione el país de la camiseta que desea</h2>
             <div class="container mt-5">
@@ -190,19 +194,11 @@
     </section>
 
 
-   
-      
-      
-      
-
-
-      <section id="contacto" class="my-5 container-fluid pb-5">
-        <div class="row d-flex flex-nowrap align-content-center justify-content-center container-fluid h-100">
-          <div class="col-10 w-100 h-100">
-            <form id="form" class="w-100">
-              <div class="card border-dark rounded-0 h-100">
+    <section id="contacto" class="my-5 container pb-5">
+            <form id="form">
+              <div class="card border-dark rounded-0">
                   <div class="card-header p-0">
-                      <div class="bg-dark text-white text-center py-2">
+                      <div class="bg-dark text-white text-center py-2 container">
                           <h3><i class="fa fa-envelope"></i> Contactanos</h3>
                           <p class="m-0">Indicanos qué camiseta quisieras que agreguemos</p>
                       </div>
@@ -253,34 +249,29 @@
                   </div>
               </div>
             </form>
-          </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <footer class="text-white d-flex justify-content-around align-items-center py-2 ">  
+    <footer class="text-white d-flex justify-content-around align-items-center py-3 container-fluid">  
         <div class="justify-content-center align-items-center" >
-          <h5>® Coderhouse 2021 - Proyecto final</h5>
+          <h5 class="text-center">® Coderhouse 2021 - Proyecto final</h5>
         </div>
         <div class="d-flex flex-column justify-content-center align-content-center">
           <div>
-            <h5>Redes sociales</h5>
+            <h5 class="text-center">Redes sociales</h5>
           </div>
-          <div>
             <ul class="d-flex list-unstyled justify-content-around">
               <li><a href="https://www.instagram.com/coderhouse/" target="_blank"><i class="fab fa-instagram"></i></a></li>
               <li><a href="https://www.coderhouse.com/" target="_blank"><i class="fab fa-chrome"></i></a></li>
               <li><a href="https://www.facebook.com/CoderHouse" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
             </ul>
-          </div>
         </div>
-      </footer>
+    </footer>
   
     
     
 </body>
 
-<!-- BOOTSTRAP 4 -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script  src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
@@ -296,12 +287,7 @@
 
 <!-- 
 
-  Agregar ordenar por nombre/pais/precio. Ver función reduce para ordenar objetos (ordenar)
-  Agregar boton para desplegar todas las camisetas disponibles
   Agregar algo que no permita comprar si no hay stock
-  Ver si implementar SPA
-  agregar ordenamiento por precio/pais/
-  agregar mostrar todas las camisetas
   responsive
   arreglar el buscador. Hacer que se vuelva a guardar y revisar que 
 -->

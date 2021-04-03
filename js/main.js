@@ -93,8 +93,12 @@ $(document).ready(function(){
         
         $('#btnCarrito').click(function(){
             $('#carrito').toggle("slow",verCarrito);
+
         });
 
+        $('#btn-close').click(function(){
+            $('#carrito').fadeOut("slow");
+        });
 
         $('#buttonAllShirts').click(function(){
             $('#showAllShirts').toggle("slow",showAllShirtsEvent);

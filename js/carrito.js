@@ -158,7 +158,9 @@ function eliminarItemCarrito(event){
             botonClickeado.closest('.item').remove();
         }else{
             if(!carritoOculto){
-                document.getElementById(`cantidad${camiseta}`).value = cantidadActualEnCarrito;
+                console.log(cantidadActualEnCarrito);
+                console.log(camiseta);
+                document.getElementById(`cantidad${camiseta}`).innerHTML = cantidadActualEnCarrito;
             }
         }
     }else{

@@ -18,12 +18,6 @@ $(document).ready(function () {
         ease: 'back'
     })
 
-
-    gsap.to("#choose", {
-        scrollTrigger: ".box", // start the animation when ".box" enters the viewport (once)
-        x: 0,
-      });
-
 });
 
 

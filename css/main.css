@@ -143,6 +143,15 @@ a{
 
 .talles-card{
     height: 10%;
+    width: 100%;
+}
+
+.talle{
+    min-height: auto;
+    height: auto;
+    max-height: 70%;
+    width: auto;
+    margin-right: .1em;
 }
 
 .buy{

@@ -179,7 +179,7 @@ function renderCamisetas(camiseta){
         html+=    `<div class="img-card">
                         <img class="img-fluid img" src="${imagenes[camiseta]}">
                     </div>
-                    <div class="talles-card">
+                    <div class="talles-card d-flex justify-content-center flex-nowrap">
                         <button id="XS ${camiseta}" class="btn talle btn-dark">XS</button>
                         <button id="S ${camiseta}" class="btn talle btn-dark">S</button>
                         <button id="M ${camiseta}" class="btn talle btn-dark">M</button>

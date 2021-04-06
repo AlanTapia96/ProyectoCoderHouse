@@ -11,7 +11,7 @@ $(document).ready(function(){
         $('.div-welcome').fadeIn('slow');
     }
 
-    /* Función para crear todos los objetos*/
+
     function instanciarCamisetas(stock,cantidad){
         for (const pais in variedadCamisetas) {
             let listaPais = variedadCamisetas[pais];
@@ -32,10 +32,6 @@ $(document).ready(function(){
     function aumento(lista,aumento) {
         lista.map(camiseta => camiseta.modificarPrecio(camiseta.devolverPrecio()*aumento));    
     }
-
-
-
-    /*********************************EVENTOS******************************************/
 
 
     function formulario(e){
@@ -60,7 +56,8 @@ $(document).ready(function(){
                 duration: 1,
                 y: 5,
                 ease: 'none'
-            })    
+            })
+            $('#success').fadeOut(4000);    
         });
         
     }
@@ -93,16 +90,16 @@ $(document).ready(function(){
         
         $('#btnCarrito').click(function(){
             $('#carrito').toggle("slow",verCarrito);
+            $('#btn-close').click(function(){
+                $('#carrito').fadeOut("slow");
+                carritoOculto = true;  
+            });
 
         });
 
-        $('#btn-close').click(function(){
-            $('#carrito').fadeOut("slow");
-        });
-
+        
         $('#buttonAllShirts').click(function(){
             $('#showAllShirts').toggle("slow",showAllShirtsEvent);
-
         });
 
         $('#buttonCountries').click(function(){
@@ -110,13 +107,12 @@ $(document).ready(function(){
 
         });
 
+        $('#confirmar-carrito').click(function(){
+            alert('Compra finalizada. ¡Muchas gracias!');
+            vaciarCarrito();
+        })
         
         
-
-        
-
-
-
 
     /******************************** API Provincias/Municipios *************************************** */
 
@@ -164,7 +160,9 @@ $(document).ready(function(){
     cantidadCarrito = obtenerCantidadStorage();
     importeTotal = obtenerImporteStorage();
     formulario();
+     
 });
+
 
 /*Función global para ser reconocida por buscador.js*/
 
@@ -185,19 +183,18 @@ function renderCamisetas(camiseta){
                         <button id="XS ${camiseta}" class="btn talle btn-dark">XS</button>
                         <button id="S ${camiseta}" class="btn talle btn-dark">S</button>
                         <button id="M ${camiseta}" class="btn talle btn-dark">M</button>
-                        <button id="L $ {camiseta}" class="btn talle btn-dark">L</button>
+                        <button id="L ${camiseta}" class="btn talle btn-dark">L</button>
                         <button id="XL ${camiseta}" class="btn talle btn-dark">XL</button>
                     </div>
                     <div class="precio-card text-center">
                         <h4 class="precio">${stockCamisetas.find(cam => cam.devolverClub().replace(" ", "") == camiseta).devolverPrecio()}</h4>
-                        <button disabled class="btn btn-secondary buy">Comprar</button> 
+                        <button disabled class="btn btn-secondary buy">Comprar</button>
                     </div>  
                 </div>
             </div>`
     return html;
 }
 
-//<h4 class="precio">${stockCamisetas.find(cam => cam.devolverClub().replace(" ", "") == camiseta).devolverPrecio()}</h4>
 
 function showAllShirtsEvent(){
     const all = document.getElementById("listShirts");
@@ -212,8 +209,3 @@ function showAllShirtsEvent(){
     sortShirts();
     
     };
-
-//Los datos del formulario guardarlos en algún lugar (array / objeto)
-
-//Arreglar el recorrido de las camisetas en el boton comprar. Recorre TODAS las camisetas. No es eficiente
-

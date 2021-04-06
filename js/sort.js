@@ -10,8 +10,6 @@ function sortShirts(){
             stockCamisetas.sort((a,b) => a.devolverPrecio() - b.devolverPrecio());
         }else if(sortSelection === '4'){
             stockCamisetas.sort((a,b) => b.devolverPrecio() - a.devolverPrecio());
-        }else if(sortSelection === '5'){
-            stockCamisetas.sort((a,b) => b.devolverPais() - a.devolverPais());
         }
         $('#listShirts').html("");
         showAllShirtsEvent();

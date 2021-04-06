@@ -6,6 +6,7 @@ html{
 
 body{
     background-color: rgba(255, 255, 255, 0.911);
+    font-family: 'Nunito', sans-serif!important;
 }
 
 a{
@@ -42,7 +43,6 @@ a{
 #carousel h1{
     font-size: 3em;
     color: #fff; 
-    font-family: 'Roboto', serif;  
     font-weight: normal; 
     top: 1em;
     margin-top: .2em; 
@@ -54,7 +54,6 @@ a{
 }
 
 .carousel-item{
-    /* background-color: rgb(192, 108, 75); */
     background-color: rgb(43, 19, 9);
 }
 
@@ -114,7 +113,6 @@ a{
 }
 
 
-/* Camisetas */
 .card-camiseta{
     width: 20em;
     height: 35em;
@@ -160,20 +158,23 @@ a{
 
 
 .carritoCompras{
-    margin-top: .3em;
-    top: 8em;
+    top: 4em;
     position: sticky;
     z-index: 1500;
 }
 
 #carrito{
+    padding-right: 2em;
+    padding-left: 2em;
+    padding-bottom: 2em;
     position: absolute;
-    display:none;
-    height: 40vh;
-    overflow: scroll;
+    display: none;
+    min-height: 20vh;
+    max-height: 80vh;
+    width: auto;
+    overflow-y: scroll;
     right: 0;
-    left: 0;
-    margin-bottom: 10em;
+    right: 0;
     background-color: white;
     border: .2px solid #000;
     box-shadow: 1px 3px 20px 10px rgb(0 0 0 / 20%);
@@ -205,16 +206,18 @@ a{
     padding: .2em;
 }
 
-/* #importeCarrito{
-    position: absolute;
-    top: 24em;
-    left: 8em;
+#importeCarrito{
+    height: 3.5em;
+    margin-bottom: .2em;
+    padding-top: .5em;
+    padding-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    border-top: .1em solid lightslategray;
+    border-bottom: .1em solid lightslategray;
    
-} */
+} 
 
-/* .elemento-carrito{
-    border-bottom: .1px solid lightslategray;
-} */
 
 
 .row{
@@ -351,6 +354,23 @@ footer ul,footer h5{
 
 @media only screen and (max-width:575px){
     
+    #carrito{
+        width: 100%;
+    }
+
+    #carrito h4{
+        font-size: .9em;
+    }
+
+    #carrito .carrito-item{
+        width: 5em;
+        height: 5em;
+    }
+
+    #carrito p{
+        font-size: .8em;
+    }
+
     #carousel{
         margin-top: 4em;
     }

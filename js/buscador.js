@@ -16,7 +16,7 @@ function buscador(){
         
         listaMap = stockCamisetas.filter(x => x.devolverClub().includes(busqueda));
         result = document.getElementById("result");
-        html = "<div class='d-flex justify-content-center flex-row mt-5'>";
+        html = "<div class='d-flex justify-content-center flex-row flex-wrap mt-5'>";
         if(listaMap.length > 0){
             for (const camisetaObj of listaMap) {
                 camiseta = camisetaObj.devolverClub();

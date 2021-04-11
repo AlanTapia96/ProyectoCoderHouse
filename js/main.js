@@ -28,7 +28,6 @@ $(document).ready(function(){
         return costoTotal;
     }
 
-
     function aumento(lista,aumento) {
         lista.map(camiseta => camiseta.modificarPrecio(camiseta.devolverPrecio()*aumento));    
     }
@@ -104,7 +103,7 @@ $(document).ready(function(){
 
         $('#buttonCountries').click(function(){
             $('#paises').toggle("slow",showAllShirtsEvent);
-
+            $('#camisetas').html("");
         });
 
         $('#confirmar-carrito').click(function(){
@@ -154,12 +153,19 @@ $(document).ready(function(){
     /*********************************** MAIN ***********************************/
 
     instanciarCamisetas(stockCamisetas,20);
-    bienvenida();
+    if(window.matchMedia("(min-width: 767px)").matches){
+        bienvenida();
+    }
     buscador();
     carritoDeCompras = obtenerCarritoStorage();
     cantidadCarrito = obtenerCantidadStorage();
     importeTotal = obtenerImporteStorage();
     formulario();
+
+    let long = document.getElementById("result").innerHTML.length;
+    console.log(long);
+
+
      
 });
 
@@ -187,7 +193,7 @@ function renderCamisetas(camiseta){
                         <button id="XL ${camiseta}" class="btn talle btn-dark">XL</button>
                     </div>
                     <div class="precio-card text-center">
-                        <h4 class="precio">${stockCamisetas.find(cam => cam.devolverClub().replace(" ", "") == camiseta).devolverPrecio()}</h4>
+                        <h4 class="precio mt-1">${stockCamisetas.find(cam => cam.devolverClub().replace(" ", "") == camiseta).devolverPrecio()} ARS</h4>
                         <button disabled class="btn btn-secondary buy">Comprar</button>
                     </div>  
                 </div>

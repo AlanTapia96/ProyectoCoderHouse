@@ -216,7 +216,7 @@ a{
 }
 
 #importeCarrito{
-    height: 3.5em;
+    height: auto;
     margin-bottom: .2em;
     padding-top: .5em;
     padding-bottom: 1em;

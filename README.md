@@ -1,4 +1,4 @@
-# ProyectoCoderHouse
+# ProyectoCoderHouse Javascript
 Proyecto final del curso de Javascript en CoderHouse.
 
 
